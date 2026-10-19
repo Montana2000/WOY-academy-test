@@ -478,6 +478,13 @@ function Hero({ onOpenReservation }: { onOpenReservation?: () => void }) {
 
           {/* Left Column Content strictly confined to left ~36% to never hide the computer */}
           <div className="hero-cinema__canvas-content">
+            <div className="hero-cinema__brand-mark">
+              <img
+                src="/woy-hero.webp"
+                alt="WÔY"
+                className="hero-cinema__woy-img"
+              />
+            </div>
             <h1 className="hero-cinema__title">
               <span className="hero-cinema__title-white">COMPRENDS TON ARGENT.</span>
               <span className="hero-cinema__title-gold">AVANT D'INVESTIR.</span>
@@ -764,86 +771,344 @@ function LaambInterface() {
     </div>
   )
 }
+type PillarIconType = "book-open" | "chart-up" | "doc-analysis" | "trophy"
+
+function PillarHeaderIcon({ type }: { type: PillarIconType }) {
+  if (type === "book-open") {
+    return (
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M2 4.5A2.5 2.5 0 0 1 4.5 2H11v17H4.5A2.5 2.5 0 0 0 2 21.5z" />
+        <path d="M22 4.5A2.5 2.5 0 0 0 19.5 2H13v17h6.5a2.5 2.5 0 0 1 2.5 2.5z" />
+      </svg>
+    )
+  }
+  if (type === "chart-up") {
+    return (
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M3 11l6-6 4 4 7-7" />
+        <path d="M15 2h5v5" />
+        <path d="M5 21v-5" />
+        <path d="M10 21v-8" />
+        <path d="M15 21v-6" />
+        <path d="M20 21V10" />
+      </svg>
+    )
+  }
+  if (type === "doc-analysis") {
+    return (
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M6 2h8l4 4v16H6z" />
+        <path d="M14 2v4h4" />
+        <path d="M9 10h6" />
+        <path d="M9 14h6" />
+        <path d="M9 18h4" />
+      </svg>
+    )
+  }
+  return (
+    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+      <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+      <path d="M4 22h16" />
+      <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+      <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+      <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+    </svg>
+  )
+}
+
+function PillarParcoursPreview() {
+  const modules = [
+    {
+      title: "Comprendre la crypto",
+      status: "Terminé",
+      state: "done" as const,
+    },
+    {
+      title: "Les marchés financiers",
+      status: "En cours",
+      state: "active" as const,
+    },
+    {
+      title: "Gestion du risque",
+      status: "À découvrir",
+      state: "locked" as const,
+    },
+    {
+      title: "Stratégies d'investissement",
+      status: "À découvrir",
+      state: "locked" as const,
+    },
+  ]
+
+  return (
+    <div className="pillar-preview pillar-preview--parcours">
+      <div className="pp-parcours-prog">
+        <div className="pp-parcours-prog__meta">
+          <span>PROGRESSION DU PARCOURS</span>
+          <b>35%</b>
+        </div>
+        <div className="pp-parcours-prog__bar">
+          <span style={{ width: "35%" }} />
+        </div>
+      </div>
+      <div className="pp-module-list">
+        {modules.map((mod) => (
+          <div
+            key={mod.title}
+            className={`pp-module-item pp-module-item--${mod.state}`}
+          >
+            <span className="pp-module-icon" aria-hidden="true">
+              {mod.state === "done" && "✓"}
+              {mod.state === "active" && "◉"}
+              {mod.state === "locked" && (
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="4" y="11" width="16" height="10" rx="2" />
+                  <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+                </svg>
+              )}
+            </span>
+            <div className="pp-module-text">
+              <b>{mod.title}</b>
+              <small>{mod.status}</small>
+            </div>
+            <span className={`pp-module-badge pp-module-badge--${mod.state}`}>
+              {mod.state === "done" && "✓"}
+              {mod.state === "active" && "▶"}
+              {mod.state === "locked" && (
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="4" y="11" width="16" height="10" rx="2" />
+                  <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+                </svg>
+              )}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function PillarPortfolioPreview() {
+  const periods = ["1J", "7J", "1M", "3M", "1A"]
+
+  return (
+    <div className="pillar-preview pillar-preview--portfolio">
+      <div className="pp-port-top">
+        <small>Solde virtuel</small>
+        <strong>1 250 000 FCFA</strong>
+        <div className="pp-port-perf">
+          <span className="pp-port-gain">+12,4 %</span>
+          <span className="pp-port-sub">Performance simulée</span>
+        </div>
+      </div>
+
+      <div className="pp-port-chart">
+        <svg viewBox="0 0 260 76" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="ppTealGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#14b8a6" stopOpacity="0.34" />
+              <stop offset="100%" stopColor="#14b8a6" stopOpacity="0.0" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M0 64 C24 61 36 52 56 54 S88 40 112 43 S146 28 172 31 S212 16 260 7 V76 H0 Z"
+            fill="url(#ppTealGrad)"
+          />
+          <path
+            d="M0 64 C24 61 36 52 56 54 S88 40 112 43 S146 28 172 31 S212 16 260 7"
+            fill="none"
+            stroke="#2dd4bf"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <circle cx="258" cy="7" r="3" fill="#2dd4bf" />
+        </svg>
+      </div>
+
+      <div className="pp-port-periods" role="group" aria-label="Filtres de période">
+        {periods.map((p) => (
+          <span
+            key={p}
+            className={`pp-port-period ${p === "1M" ? "is-active" : ""}`}
+          >
+            {p}
+          </span>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function PillarReportPreview() {
+  const items = [
+    { label: "Analyse des marchés", color: "blue" },
+    { label: "Tendances à surveiller", color: "teal" },
+    { label: "Risques et opportunités", color: "emerald" },
+    { label: "Synthèse du mois", color: "gold" },
+  ]
+  const barHeights = [34, 46, 58, 72, 84, 100]
+
+  return (
+    <div className="pillar-preview pillar-preview--report">
+      <div className="pp-report-doc">
+        <div className="pp-report-head">
+          <div>
+            <strong>Rapport mensuel</strong>
+            <small>Analyse des marchés</small>
+          </div>
+          <span className="pp-report-tag">PDF</span>
+        </div>
+
+        <div className="pp-report-bars" aria-hidden="true">
+          {barHeights.map((h, i) => (
+            <span key={i} style={{ height: `${h}%` }} />
+          ))}
+        </div>
+
+        <ul className="pp-report-list">
+          {items.map((item) => (
+            <li key={item.label}>
+              <i className={`pp-report-dot pp-report-dot--${item.color}`} aria-hidden="true">
+                ✓
+              </i>
+              <span>{item.label}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  )
+}
+
+function PillarLaambPreview() {
+  const metrics = [
+    { label: "Analyse", val: "88%" },
+    { label: "Risque", val: "Maîtrisé" },
+    { label: "Performance", val: "+8,6%" },
+  ]
+
+  return (
+    <div className="pillar-preview pillar-preview--laamb">
+      <div className="pp-laamb-head">
+        <div>
+          <strong>LAAMB</strong>
+          <small>L'Arène des Traders</small>
+        </div>
+        <span className="pp-laamb-badge">Trading simulé</span>
+      </div>
+
+      <div className="pp-laamb-duel">
+        <div className="pp-laamb-player">
+          <span className="pp-laamb-avatar pp-laamb-avatar--gold">A</span>
+          <b>Ahmadou</b>
+        </div>
+        <span className="pp-laamb-vs">VS</span>
+        <div className="pp-laamb-player pp-laamb-player--right">
+          <b>Challenger</b>
+          <span className="pp-laamb-avatar pp-laamb-avatar--dark">C</span>
+        </div>
+      </div>
+
+      <div className="pp-laamb-chart" aria-hidden="true">
+        <svg viewBox="0 0 240 46" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="ppLaambGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#d7ad63" stopOpacity="0.28" />
+              <stop offset="100%" stopColor="#d7ad63" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M0 38 C30 35 48 26 78 28 S122 16 155 20 S198 9 240 5 V46 H0 Z"
+            fill="url(#ppLaambGrad)"
+          />
+          <path
+            d="M0 38 C30 35 48 26 78 28 S122 16 155 20 S198 9 240 5"
+            fill="none"
+            stroke="#e5b869"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+          />
+          <path
+            d="M0 40 C34 39 58 33 88 35 S132 30 165 32 S204 25 240 22"
+            fill="none"
+            stroke="#64748b"
+            strokeWidth="1.3"
+            strokeDasharray="3 3"
+          />
+        </svg>
+      </div>
+
+      <div className="pp-laamb-metrics">
+        {metrics.map((m) => (
+          <div className="pp-laamb-metric" key={m.label}>
+            <small>{m.label}</small>
+            <b>{m.val}</b>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 const pillars = [
   {
     number: "01",
-    icon: "book" as IconName,
+    icon: "book-open" as PillarIconType,
     title: "Parcours pédagogique",
-    description:
-      "Apprends avec des cours progressifs, des exercices et des mises en situation concrètes.",
-    micro: "Apprendre à ton rythme",
-    ui: <LessonInterface />,
+    description: "Des cours progressifs, concrets et adaptés à ton niveau.",
+    ui: <PillarParcoursPreview />,
   },
   {
     number: "02",
-    icon: "wallet" as IconName,
+    icon: "chart-up" as PillarIconType,
     title: "Portefeuille simulé",
     description:
-      "Entraîne-toi à prendre des décisions avec un portefeuille fictif, sans utiliser d’argent réel.",
-    micro: "Fonds fictifs · Aucune transaction réelle",
-    ui: <PortfolioInterface />,
+      "Entraîne-toi sans risque financier réel avec des conditions de marché simulées.",
+    ui: <PillarPortfolioPreview />,
   },
   {
     number: "03",
-    icon: "document" as IconName,
+    icon: "doc-analysis" as PillarIconType,
     title: "Rapports mensuels",
     description:
-      "Découvre des analyses structurées pour mieux comprendre l’actualité financière et les marchés.",
-    micro: "Comprendre les marchés",
-    ui: <ReportInterface />,
+      "Des analyses claires pour comprendre les tendances et les risques des marchés.",
+    ui: <PillarReportPreview />,
   },
   {
     number: "04",
-    icon: "target" as IconName,
-    title: "LAAMB — L’arène des Traders",
+    icon: "trophy" as PillarIconType,
+    title: "Arène des Traders",
     description:
-      "Défies d’autres apprenants, teste tes connaissances financières et progresse à travers des confrontations pédagogiques.",
-    micro: "Confrontations pédagogiques",
-    ui: <LaambInterface />,
+      "Défie d'autres traders et confronte tes stratégies dans une compétition simulée.",
+    ui: <PillarLaambPreview />,
   },
 ]
 
 function Platform() {
   return (
-    <section id="plateforme" className="section platform">
-      <div className="shell">
-        <div className="section-head section-head--split">
-          <div>
-            <div className="eyebrow">
-              <span /> La plateforme
-            </div>
-            <h2>
-              À l’intérieur
-              <br />
-              de WÔY.
-            </h2>
-          </div>
-          <div>
-            <h3>Découvre ce que tu peux faire avec WÔY.</h3>
-            <p>
-              Apprends à gérer ton argent, entraîne-toi avec un portefeuille
-              simulé, relève des défis avec d’autres apprenants et suis tes
-              progrès. Tout est conçu pour t’aider à comprendre avant de prendre
-              tes décisions.
-            </p>
-          </div>
+    <section id="plateforme" className="section platform-pillars">
+      <div className="shell platform-pillars__shell">
+        <div className="platform-pillars__head">
+          <h2>
+            Une plateforme, <em>quatre piliers.</em>
+          </h2>
+          <p>
+            Un parcours complet pour apprendre la finance, s'entraîner sur les
+            marchés, comprendre les analyses et relever des défis de trading.
+          </p>
         </div>
-        <div className="bento-grid">
+        <div className="pillars-grid">
           {pillars.map((pillar) => (
             <article className="pillar-card" key={pillar.title}>
-              <div className="pillar-card__head">
-                <span className="pillar-icon">
-                  <Icon name={pillar.icon} />
+              <div className="pillar-card__top">
+                <span className="pillar-card__icon">
+                  <PillarHeaderIcon type={pillar.icon} />
                 </span>
-                <span className="pillar-number">{pillar.number}</span>
                 <h3>{pillar.title}</h3>
                 <p>{pillar.description}</p>
               </div>
-              <div className="pillar-card__ui">{pillar.ui}</div>
-              <div className="micro-label">
-                <span />
-                {pillar.micro}
-              </div>
+              <div className="pillar-card__preview">{pillar.ui}</div>
             </article>
           ))}
         </div>
@@ -853,269 +1118,459 @@ function Platform() {
 }
 
 const methodSteps = [
-  { num: "01", title: "Situation Narrative", sub: "Une scene reelle ouvre le module.", loc: "Lieu : Dakar, Senegal" },
-  { num: "02", title: "Choix", sub: "Tu choisis ta decision.", note: "Chaque choix a un impact.", active: true },
-  { num: "03", title: "Simulation", sub: "Le marche reagit.", note: "Consequence en cours..." },
-  { num: "04", title: "Djeli / Feedback", sub: "Djeli t'aide a comprendre ton raisonnement.", tags: ["COMPRENDS", "STRUCTURE", "PROTEGE"] as string[] },
-  { num: "05", title: "Progression", sub: "Tu avances. Tu deviens maitre de ton marche.", xp: "+120 XP", coins: "+25 Cauris" },
+  {
+    num: "01",
+    title: "HISTOIRE",
+    desc: "Découvre une situation financière du quotidien.",
+  },
+  {
+    num: "02",
+    title: "CHOIX",
+    desc: "Fais ton choix et découvre ses conséquences.",
+  },
+  {
+    num: "03",
+    title: "SIMULATION",
+    desc: "Observe les réactions du marché simulé.",
+  },
+  {
+    num: "04",
+    title: "DJÉLI / FEEDBACK",
+    desc: "Comprends tes erreurs grâce aux conseils du mentor.",
+  },
+  {
+    num: "05",
+    title: "PROGRESSION",
+    desc: "Développe tes compétences étape par étape.",
+  },
 ]
 
-function MethodCardVisual({ step }: { step: typeof methodSteps[0] }) {
-  if (step.num === "01")
+function MethodCardVisual({ num }: { num: string }) {
+  if (num === "01") {
     return (
-      <div className="mc-visual mc-visual--story">
-        <div className="mc-story-scene">
-          <img src="/ahmadou.png" alt="Ahmadou" className="mc-char-img" />
-          <div className="mc-bubble">
-            <small>AHMADOU</small>
-            <p>"J'ai recu une prime. Que dois-je verifier avant de decider ?"</p>
-          </div>
+      <div className="ms-visual ms-visual--story">
+        <img
+          src="/ahmadou.png"
+          alt="Ahmadou dans une situation narrative"
+          className="ms-story-img"
+          loading="lazy"
+        />
+        <span className="ms-story-tag">Dakar · Situation réelle</span>
+      </div>
+    )
+  }
+
+  if (num === "02") {
+    return (
+      <div className="ms-visual ms-visual--choice">
+        <div className="ms-choice-pill ms-choice-pill--active">
+          <span className="ms-choice-ico">↗</span>
+          <span>Attendre le repli</span>
+          <span className="ms-choice-check">✓</span>
+        </div>
+        <div className="ms-choice-pill">
+          <span className="ms-choice-ico">☆</span>
+          <span>Entrer maintenant</span>
+        </div>
+        <div className="ms-choice-pill">
+          <span className="ms-choice-ico">⇄</span>
+          <span>Changer de marché</span>
         </div>
       </div>
     )
-  if (step.num === "02")
+  }
+
+  if (num === "03") {
     return (
-      <div className="mc-visual mc-visual--choice">
-        <div className="mc-choice-list">
-          {[
-            { label: "Attendre le repli", icon: "&#8599;", active: true },
-            { label: "Entrer maintenant", icon: "&#9734;", active: false },
-            { label: "Changer de marche", icon: "&#8644;", active: false },
-          ].map(({ label, icon, active }) => (
-            <div key={label} className={`mc-choice-item${active ? " mc-choice-item--active" : ""}`}>
-              <span className="mc-choice-icon" dangerouslySetInnerHTML={{ __html: icon }} />
-              {label}
-              {active && <span className="mc-choice-check">&#10003;</span>}
-            </div>
-          ))}
-        </div>
-      </div>
-    )
-  if (step.num === "03")
-    return (
-      <div className="mc-visual mc-visual--sim">
-        <svg viewBox="0 0 200 130" className="mc-chart-svg" xmlns="http://www.w3.org/2000/svg">
-          {/* Dashed golden curve at bottom (support/demand curve) matching the reference */}
-          <path d="M 0 65 Q 75 110 200 55" stroke="#caa056" strokeWidth="2.2" strokeDasharray="5 4" fill="none" opacity="0.9"/>
-          
+      <div className="ms-visual ms-visual--sim">
+        <svg
+          viewBox="0 0 200 100"
+          className="ms-candles-svg"
+          aria-hidden="true"
+        >
+          <path
+            d="M 4 56 Q 82 90 196 42"
+            stroke="#e5b869"
+            strokeWidth="2"
+            strokeDasharray="4 4"
+            fill="none"
+            opacity="0.9"
+          />
           {/* Candle 1 - red */}
-          <line x1="24" y1="36" x2="24" y2="68" stroke="#842c2c" strokeWidth="2"/>
-          <rect x="20" y="44" width="8" height="20" fill="#d24b4b" rx="2"/>
-
-          {/* Candle 2 - red (tall) */}
-          <line x1="44" y1="36" x2="44" y2="76" stroke="#842c2c" strokeWidth="2"/>
-          <rect x="40" y="44" width="8" height="28" fill="#d24b4b" rx="2"/>
-
+          <line x1="24" y1="24" x2="24" y2="58" stroke="#991b1b" strokeWidth="1.8" />
+          <rect x="20" y="30" width="8" height="20" fill="#ef4444" rx="2" />
+          {/* Candle 2 - red */}
+          <line x1="48" y1="26" x2="48" y2="66" stroke="#991b1b" strokeWidth="1.8" />
+          <rect x="44" y="32" width="8" height="26" fill="#ef4444" rx="2" />
           {/* Candle 3 - green */}
-          <line x1="64" y1="56" x2="64" y2="78" stroke="#1d6639" strokeWidth="2"/>
-          <rect x="60" y="60" width="8" height="15" fill="#2ecc71" rx="2"/>
-
+          <line x1="72" y1="46" x2="72" y2="70" stroke="#166534" strokeWidth="1.8" />
+          <rect x="68" y="50" width="8" height="14" fill="#22c55e" rx="2" />
           {/* Candle 4 - red */}
-          <line x1="84" y1="54" x2="84" y2="82" stroke="#842c2c" strokeWidth="2"/>
-          <rect x="80" y="58" width="8" height="21" fill="#d24b4b" rx="2"/>
-
-          {/* Candle 5 - red (bottom dip) */}
-          <line x1="104" y1="68" x2="104" y2="84" stroke="#842c2c" strokeWidth="2"/>
-          <rect x="100" y="72" width="8" height="10" fill="#d24b4b" rx="2"/>
-
+          <line x1="96" y1="44" x2="96" y2="76" stroke="#991b1b" strokeWidth="1.8" />
+          <rect x="92" y="48" width="8" height="22" fill="#ef4444" rx="2" />
+          {/* Candle 5 - red dip */}
+          <line x1="120" y1="58" x2="120" y2="78" stroke="#991b1b" strokeWidth="1.8" />
+          <rect x="116" y="62" width="8" height="11" fill="#ef4444" rx="2" />
           {/* Candle 6 - green */}
-          <line x1="124" y1="50" x2="124" y2="79" stroke="#1d6639" strokeWidth="2"/>
-          <rect x="120" y="54" width="8" height="20" fill="#2ecc71" rx="2"/>
-
-          {/* Candle 7 - red */}
-          <line x1="144" y1="34" x2="144" y2="62" stroke="#842c2c" strokeWidth="2"/>
-          <rect x="140" y="38" width="8" height="16" fill="#d24b4b" rx="2"/>
-
-          {/* Candle 8 - green impulse (very tall) */}
-          <line x1="164" y1="20" x2="164" y2="70" stroke="#1d6639" strokeWidth="2"/>
-          <rect x="160" y="24" width="8" height="42" fill="#2ecc71" rx="2"/>
+          <line x1="144" y1="38" x2="144" y2="68" stroke="#166534" strokeWidth="1.8" />
+          <rect x="140" y="42" width="8" height="20" fill="#22c55e" rx="2" />
+          {/* Candle 7 - green impulse */}
+          <line x1="170" y1="12" x2="170" y2="60" stroke="#166534" strokeWidth="1.8" />
+          <rect x="166" y="16" width="8" height="38" fill="#22c55e" rx="2" />
         </svg>
-        <div className="mc-zone-label">Zone de demande testee</div>
       </div>
     )
-  if (step.num === "04")
+  }
+
+  if (num === "04") {
     return (
-      <div className="mc-visual mc-visual--djeli">
-        <img src="/djeli.png" alt="Djeli" className="mc-djeli-img" />
-        <p className="mc-djeli-quote">
-          "Le bon trade n'est pas le plus rapide. Ce que seul dont certes, le risque et l'invalidation sont clairs."
-        </p>
+      <div className="ms-visual ms-visual--djeli">
+        <div className="ms-djeli-ring">
+          <img
+            src="/djeli.png"
+            alt="Mentor Djéli"
+            className="ms-djeli-avatar"
+            loading="lazy"
+          />
+        </div>
+        <span className="ms-djeli-badge">Conseil du mentor</span>
       </div>
     )
+  }
+
   return (
-    <div className="mc-visual mc-visual--prog">
-      <div className="mc-tree-icon"><Icon name="spark" size={32} /></div>
-      <div className="mc-prog-label">COMPETENCE ACQUISE</div>
-      <p className="mc-prog-text">Tu avances. Tu deviens maitre de ton marche.</p>
-      <div className="mc-badges">
-        <span className="mc-badge mc-badge--xp">&#11088; {step.xp ?? ""}</span>
-        <span className="mc-badge mc-badge--coin">&#129689; {step.coins ?? ""}</span>
+    <div className="ms-visual ms-visual--prog">
+      <div className="ms-prog-medallion" aria-hidden="true">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4-3.9-3.8 5.4-.8L12 2z" />
+          <path d="M8 21h8" />
+        </svg>
+      </div>
+      <div className="ms-prog-pills">
+        <span className="ms-prog-pill ms-prog-pill--gold">+120 XP</span>
+        <span className="ms-prog-pill">+25 Cauris</span>
       </div>
     </div>
   )
 }
 
 function Method() {
-  return (
-    <section id="methode" className="section method">
-      <div className="shell">
-        <div className="section-head section-head--center">
-          <div className="eyebrow eyebrow--light">
-            <span /> Notre methode
-          </div>
-          <h2>
-            WOY n'est pas une simple formation.
-            <em>C'est une methode a vivre.</em>
-          </h2>
-          <p>Une decision <i>&#183;</i> Une consequence <i>&#183;</i> Une lecon</p>
-        </div>
-        <div className="mc-row">
-          {methodSteps.map((step, i) => (
-            <div key={step.num} className={`mc-card${step.active ? " mc-card--active" : ""}`}>
-              <div className="mc-num">{step.num}</div>
-              <MethodCardVisual step={step} />
-              <h3 className="mc-title">{step.title}</h3>
-              <p className="mc-sub">{step.sub}</p>
-              {step.tags && (
-                <div className="mc-tags">
-                  {step.tags.map((t: string) => <span key={t}>{t}</span>)}
-                </div>
-              )}
-              {step.loc && <div className="mc-loc">&#128205; {step.loc}</div>}
-              {step.note && !step.tags && <div className="mc-note">{step.note}</div>}
+  const trackRef = useRef<HTMLDivElement | null>(null)
+  const [activeIndex, setActiveIndex] = useState(0)
+  const dragState = useRef({ isDown: false, startX: 0, scrollLeft: 0 })
 
-            </div>
+  const handleScroll = () => {
+    const el = trackRef.current
+    if (!el) return
+    const firstCard = el.querySelector<HTMLElement>(".method-step-card")
+    if (!firstCard) return
+    const cardWidth = firstCard.offsetWidth + 12
+    const idx = Math.min(
+      methodSteps.length - 1,
+      Math.max(0, Math.round(el.scrollLeft / cardWidth))
+    )
+    setActiveIndex(idx)
+  }
+
+  const scrollToCard = (index: number) => {
+    const el = trackRef.current
+    if (!el) return
+    const cards = el.querySelectorAll<HTMLElement>(".method-step-card")
+    const target = cards[index]
+    if (!target) return
+    el.scrollTo({
+      left: target.offsetLeft - el.offsetLeft,
+      behavior: "smooth",
+    })
+    setActiveIndex(index)
+  }
+
+  const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = trackRef.current
+    if (!el) return
+    dragState.current = {
+      isDown: true,
+      startX: e.pageX - el.offsetLeft,
+      scrollLeft: el.scrollLeft,
+    }
+  }
+
+  const onMouseLeaveOrUp = () => {
+    dragState.current.isDown = false
+  }
+
+  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!dragState.current.isDown) return
+    const el = trackRef.current
+    if (!el) return
+    e.preventDefault()
+    const x = e.pageX - el.offsetLeft
+    const walk = (x - dragState.current.startX) * 1.2
+    el.scrollLeft = dragState.current.scrollLeft - walk
+  }
+
+  return (
+    <section id="methode" className="section method-compact">
+      <div className="shell method-compact__shell">
+        <div className="method-compact__head">
+          <h2>La finance s'apprend aussi par l'histoire</h2>
+          <p>
+            Avec WÔY, chaque histoire devient une expérience pour apprendre,
+            faire des choix et progresser.
+          </p>
+        </div>
+
+        <div
+          ref={trackRef}
+          className="method-steps-track"
+          onScroll={handleScroll}
+          onMouseDown={onMouseDown}
+          onMouseLeave={onMouseLeaveOrUp}
+          onMouseUp={onMouseLeaveOrUp}
+          onMouseMove={onMouseMove}
+        >
+          {methodSteps.map((step, idx) => (
+            <article
+              key={step.num}
+              className={`method-step-card${activeIndex === idx ? " is-active" : ""}`}
+            >
+              <span className="method-step-card__num">{step.num}</span>
+              <MethodCardVisual num={step.num} />
+              <h3 className="method-step-card__title">{step.title}</h3>
+              <p className="method-step-card__desc">{step.desc}</p>
+            </article>
           ))}
         </div>
-        <div className="method-conclusion">
-          <span />
-          Tu vis. Tu decides. <em>Tu apprends.</em>
-          <span />
+
+        <div className="method-dots" role="tablist" aria-label="Étapes de la méthode">
+          {methodSteps.map((step, idx) => (
+            <button
+              key={step.num}
+              type="button"
+              role="tab"
+              aria-selected={activeIndex === idx}
+              aria-label={`Étape ${step.num} : ${step.title}`}
+              className={`method-dot${activeIndex === idx ? " is-active" : ""}`}
+              onClick={() => scrollToCard(idx)}
+            />
+          ))}
         </div>
       </div>
     </section>
   )
 }
 
+const narrativeChoices = [
+  {
+    letter: "A",
+    label: "Investir immédiatement",
+    tone: "warn" as const,
+    feedback:
+      "Attention : une promesse de placement sans risque doit être vérifiée.",
+  },
+  {
+    letter: "B",
+    label: "Vérifier les informations et les risques",
+    tone: "good" as const,
+    feedback:
+      "Bon réflexe : comprendre les risques et vérifier les informations avant de décider.",
+  },
+  {
+    letter: "C",
+    label: "Demander conseil avant de décider",
+    tone: "neutral" as const,
+    feedback:
+      "Demander conseil peut aider, mais il faut aussi vérifier les informations par soi-même.",
+  },
+]
 
-const choices = [
-  [
-    "Investir immédiatement.",
-    "Une décision rapide peut t’exposer à des informations incomplètes.",
-  ],
-  [
-    "Vérifier les informations et les risques.",
-    "Tu prends le temps de distinguer les faits, les promesses et les risques.",
-  ],
-  [
-    "Demander conseil avant de décider.",
-    "Un avis extérieur peut t’aider, mais la décision doit rester comprise et réfléchie.",
-  ],
+const narrativeCharacters = [
+  {
+    id: "gassama",
+    name: "Gassama",
+    role: "Le contre-exemple",
+    img: "/gassama.png",
+    featured: false,
+  },
+  {
+    id: "ahmadou",
+    name: "Ahmadou",
+    role: "L'apprenant",
+    img: "/ahmadou.png",
+    featured: true,
+  },
+  {
+    id: "djeli",
+    name: "Djéli",
+    role: "Le guide",
+    img: "/djeli.png",
+    featured: false,
+  },
 ]
 
 function Narrative() {
-  const [selected, setSelected] = useState(1)
+  const [selected, setSelected] = useState<number | null>(null)
+  const activeChoice = selected !== null ? narrativeChoices[selected] : null
+
+  const handleChoiceKeyDown = (
+    e: React.KeyboardEvent<HTMLButtonElement>,
+    idx: number
+  ) => {
+    if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+      e.preventDefault()
+      const next = (idx + 1) % narrativeChoices.length
+      setSelected(next)
+    } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+      e.preventDefault()
+      const prev =
+        (idx - 1 + narrativeChoices.length) % narrativeChoices.length
+      setSelected(prev)
+    }
+  }
+
   return (
-    <section className="section narrative">
-      <div className="shell">
-        <div className="section-head section-head--split narrative-head">
-          <div>
-            <div className="eyebrow">
-              <span /> Les histoires dans les cours
-            </div>
-            <h2>
-              Des histoires pour comprendre.
-              <em>Des décisions pour apprendre.</em>
-            </h2>
-          </div>
+    <section className="section narrative-compact">
+      <div className="shell narrative-compact__shell">
+        {/* Compact Header */}
+        <div className="narrative-compact__head">
+          <h2>
+            Des histoires pour comprendre.{" "}
+            <em>Des décisions pour apprendre.</em>
+          </h2>
           <p>
-            Dans les leçons, Ahmadou, Gassama et Djéli vivent des situations
-            concrètes. Tu observes, tu décides, tu apprends.
+            Avec Ahmadou, Gassama et Djéli, découvre des situations financières
+            concrètes et apprends à faire les bons choix.
           </p>
         </div>
-        <div className="narrative-grid">
-          <div className="characters-panel">
-            <div className="characters-copy">
-              <small>LES PERSONNAGES WÔY</small>
-              <h3>Des situations proches de la vie réelle.</h3>
-              <p>
-                Ils donnent un visage aux décisions, aux doutes et aux
-                apprentissages.
-              </p>
-            </div>
-            <div className="character-stage">
-              {[
-                { name: "Gassama", role: "Le contexte", img: "/gassama.png", cls: "c0" },
-                { name: "Ahmadou", role: "L’apprenant", img: "/ahmadou.png", cls: "c1" },
-                { name: "Djéli", role: "Le guide", img: "/djeli.png", cls: "c2" },
-              ].map(({ name, role, img, cls }) => (
-                <div className={`character ${cls}`} key={name}>
-                  <div className="character-art">
-                    <img
-                      src={img}
-                      alt={name}
-                      className="character-photo"
-                      loading="lazy"
-                    />
+
+        {/* Main 2-Zone Layout (Left 38% Characters / Right 62% Interactive Simulation) */}
+        <div className="narrative-compact__grid">
+          {/* Left Zone: 3 Official Characters */}
+          <aside
+            className="narrative-cast"
+            aria-label="Les personnages officiels WÔY Academy"
+          >
+            <div className="narrative-cast__pattern" aria-hidden="true" />
+            <div className="narrative-cast__row">
+              {narrativeCharacters.map((char) => {
+                const isDjeliHighlighted =
+                  char.id === "djeli" && selected !== null
+                return (
+                  <div
+                    key={char.id}
+                    className={`narrative-char narrative-char--${char.id}${
+                      char.featured ? " is-featured" : ""
+                    }${isDjeliHighlighted ? " is-speaking" : ""}`}
+                  >
+                    <div className="narrative-char__frame">
+                      <img
+                        src={char.img}
+                        alt={`${char.name} — ${char.role}`}
+                        className="narrative-char__img"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="narrative-char__caption">
+                      <b>{char.name}</b>
+                      <span>{char.role}</span>
+                    </div>
                   </div>
-                  <b>{name}</b>
-                  <small>{role}</small>
-                </div>
-              ))}
+                )
+              })}
             </div>
-            <div className="character-badge-note">
-              <Icon name="spark" size={13} /> Personnages officiels WÔY
-            </div>
-          </div>
-          <div className="scenario">
-            <div className="scenario__top">
-              <span>Démonstration pédagogique</span>
-              <small>LEÇON · DÉCISION & RISQUE</small>
-            </div>
-            <h3>Ahmadou face à une décision financière</h3>
-            <div className="scenario__story">
-              <span className="avatar avatar--ah">A</span>
-              <p>
-                Ahmadou reçoit une prime de <b>250 000 FCFA</b>. Gassama lui
-                parle d’un placement présenté comme sans risque. Ahmadou hésite.
-                Que devrait-il faire ?
+          </aside>
+
+          {/* Right Zone: Interactive Pedagogical Simulation */}
+          <div className="narrative-sim">
+            <div className="narrative-sim__head">
+              <span className="narrative-sim__tag">
+                DÉMONSTRATION PÉDAGOGIQUE
+              </span>
+              <h3>Ahmadou face à une décision financière</h3>
+              <p className="narrative-sim__story">
+                « Ahmadou reçoit une prime de <b>250 000 FCFA</b>. Gassama lui
+                propose un placement présenté comme sans risque. »
               </p>
             </div>
-            <h4>Que ferais-tu à sa place ?</h4>
-            <div
-              className="choice-list"
-              role="radiogroup"
-              aria-label="Choisir une réponse"
-            >
-              {choices.map(([label], i) => (
-                <button
-                  type="button"
-                  role="radio"
-                  aria-checked={selected === i}
-                  className={selected === i ? "selected" : ""}
-                  onClick={() => setSelected(i)}
-                  key={label}
+
+            <div className="narrative-sim__question-block">
+              <p className="narrative-sim__question">
+                Que devrait faire Ahmadou ?
+              </p>
+              <div
+                className="narrative-sim__choices"
+                role="radiogroup"
+                aria-label="Que devrait faire Ahmadou ?"
+              >
+                {narrativeChoices.map((choice, idx) => {
+                  const isSelected = selected === idx
+                  return (
+                    <button
+                      key={choice.letter}
+                      type="button"
+                      role="radio"
+                      aria-checked={isSelected}
+                      className={`narrative-choice-btn${
+                        isSelected ? ` is-selected is-${choice.tone}` : ""
+                      }`}
+                      onClick={() => setSelected(idx)}
+                      onKeyDown={(e) => handleChoiceKeyDown(e, idx)}
+                    >
+                      <span className="narrative-choice-btn__letter">
+                        {choice.letter}
+                      </span>
+                      <span className="narrative-choice-btn__text">
+                        {choice.letter} — {choice.label}
+                      </span>
+                      <span
+                        className="narrative-choice-btn__check"
+                        aria-hidden="true"
+                      >
+                        {isSelected ? "✓" : ""}
+                      </span>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+
+            {activeChoice && (
+              <div
+                className="narrative-sim__result"
+                role="region"
+                aria-live="polite"
+              >
+                <div
+                  className={`narrative-sim__feedback is-${activeChoice.tone}`}
                 >
-                  <span>{String.fromCharCode(65 + i)}</span>
-                  {label}
-                  <i>{selected === i && <Icon name="check" size={14} />}</i>
-                </button>
-              ))}
-            </div>
-            <div className="consequence">
-              <small>CONSÉQUENCE PÉDAGOGIQUE</small>
-              <p>{choices[selected][1]}</p>
-            </div>
-            <div className="djeli-feedback">
-              <span className="avatar avatar--dj">D</span>
-              <p>
-                <small>LE RETOUR DE DJÉLI</small>
-                <b>
-                  « Avant d’investir, prends le temps de comprendre les risques
-                  et de vérifier les informations. »
-                </b>
-              </p>
-            </div>
+                  <p>{activeChoice.feedback}</p>
+                </div>
+
+                <div className="narrative-sim__djeli-bar">
+                  <div className="narrative-sim__djeli-content">
+                    <img
+                      src="/djeli.png"
+                      alt="Djéli"
+                      className="narrative-sim__djeli-mini"
+                    />
+                    <div>
+                      <small>LE CONSEIL DE DJÉLI</small>
+                      <p>
+                        « Avant d'investir, prends le temps de comprendre les
+                        risques et de vérifier les informations. »
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    className="narrative-sim__reset"
+                    onClick={() => setSelected(null)}
+                  >
+                    Recommencer
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -1236,10 +1691,29 @@ const routeLevels: RouteLevel[] = [
 
 function Route() {
   const [activeLevel, setActiveLevel] = useState(2)
+  const timelineRef = useRef<HTMLDivElement | null>(null)
   const step = routeLevels[activeLevel]
 
   const handleSelectLevel = (index: number) => {
-    setActiveLevel(index)
+    const clamped = Math.max(0, Math.min(routeLevels.length - 1, index))
+    setActiveLevel(clamped)
+
+    // Smoothly center the active step inside the horizontal timeline without scrolling the page
+    const container = timelineRef.current
+    if (container) {
+      const buttons = container.querySelectorAll<HTMLElement>(".route-node")
+      const target = buttons[clamped]
+      if (target) {
+        const scrollTarget =
+          target.offsetLeft -
+          container.clientWidth / 2 +
+          target.offsetWidth / 2
+        container.scrollTo({
+          left: Math.max(0, scrollTarget),
+          behavior: "smooth",
+        })
+      }
+    }
   }
 
   const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
@@ -1248,215 +1722,128 @@ function Route() {
       handleSelectLevel(index)
     } else if (e.key === "ArrowRight") {
       e.preventDefault()
-      handleSelectLevel(Math.min(routeLevels.length - 1, activeLevel + 1))
+      handleSelectLevel(Math.min(routeLevels.length - 1, index + 1))
     } else if (e.key === "ArrowLeft") {
       e.preventDefault()
-      handleSelectLevel(Math.max(0, activeLevel - 1))
+      handleSelectLevel(Math.max(0, index - 1))
     }
   }
 
   const progressPercent = (activeLevel / (routeLevels.length - 1)) * 100
 
   return (
-    <section id="route" className="section route">
-      <div className="shell">
-        <div className="section-head section-head--split reveal-on-scroll">
-          <div>
-            <div className="eyebrow eyebrow--gold">
-              <span /> La Route WÔY
-            </div>
-            <h2>
-              Une progression
-              <br />
-              <em>à ton rythme.</em>
-            </h2>
-          </div>
-          <div>
+    <section id="route" className="section route-compact">
+      <div className="shell route-compact__shell">
+        {/* 1. Compact Header */}
+        <div className="route-compact__head">
+          <div className="route-compact__head-text">
+            <span className="route-compact__eyebrow">LA ROUTE WÔY</span>
+            <h2>Une progression à ton rythme.</h2>
             <p>
               De N0 à N6, construis tes connaissances étape par étape, jusqu’au
-              Cercle Élite. Clique sur chaque étape pour explorer le programme.
+              Cercle Élite.
             </p>
-            <span className="route-note">
-              <Icon name="target" size={16} /> Chaque étape consolide tes acquis
-              et valide un palier concret.
-            </span>
           </div>
         </div>
 
-        {/* Interactive progression roadmap */}
-        <div className="roadmap-container reveal-on-scroll">
-          <div className="roadmap-scroll-hint">
-            <span>Fais défiler la route horizontalement</span>
-            <Icon name="arrow" size={14} />
-          </div>
-
-          <div
-            className="roadmap-track-wrapper"
-            role="tablist"
-            aria-label="Parcours pédagogique de la Route WÔY"
-          >
-            {/* The progression connecting line */}
-            <div className="roadmap-line-bg">
+        {/* 2. Horizontal 8-step Timeline */}
+        <div
+          ref={timelineRef}
+          className="route-timeline"
+          role="tablist"
+          aria-label="Parcours pédagogique de la Route WÔY"
+        >
+          <div className="route-timeline__track">
+            <div className="route-timeline__line" aria-hidden="true">
               <div
-                className="roadmap-line-fill"
+                className="route-timeline__line-fill"
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
 
-            {/* Steps N0 to N6 */}
-            <div className="roadmap-steps-list">
-              {routeLevels.slice(0, 7).map((lvl, i) => {
-                const isPassed = i < activeLevel
-                const isActive = i === activeLevel
-                return (
-                  <button
-                    key={lvl.id}
-                    type="button"
-                    role="tab"
-                    id={`route-tab-${lvl.id}`}
-                    aria-controls={`route-panel-${lvl.id}`}
-                    aria-selected={isActive}
-                    tabIndex={0}
-                    onClick={() => handleSelectLevel(i)}
-                    onKeyDown={(e) => handleKeyDown(e, i)}
-                    className={`roadmap-step-btn ${
-                      isActive ? "is-active" : isPassed ? "is-passed" : "is-upcoming"
-                    }`}
-                  >
-                    <span className="roadmap-step-circle">
-                      {isPassed ? (
-                        <Icon name="check" size={17} />
-                      ) : (
-                        <b>{lvl.level}</b>
-                      )}
-                    </span>
-                    <div className="roadmap-step-meta">
-                      <b className="roadmap-step-lvl">{lvl.level}</b>
-                      <small className="roadmap-step-sub">{lvl.subtitle}</small>
-                    </div>
-                  </button>
-                )
-              })}
+            {routeLevels.map((lvl, i) => {
+              const isActive = i === activeLevel
+              const isPassed = i < activeLevel
+              const circleLabel = lvl.isElite ? "★" : lvl.level
+              const nodeTitle = lvl.isElite
+                ? "Cercle Élite"
+                : `${lvl.level} — ${lvl.subtitle}`
 
-              {/* Cercle Élite (step 7) */}
-              {(() => {
-                const eliteLvl = routeLevels[7]
-                const isActive = activeLevel === 7
-                return (
-                  <button
-                    key={eliteLvl.id}
-                    type="button"
-                    role="tab"
-                    id={`route-tab-${eliteLvl.id}`}
-                    aria-controls={`route-panel-${eliteLvl.id}`}
-                    aria-selected={isActive}
-                    tabIndex={0}
-                    onClick={() => handleSelectLevel(7)}
-                    onKeyDown={(e) => handleKeyDown(e, 7)}
-                    className={`elite-step-btn ${isActive ? "is-active" : ""}`}
-                  >
-                    <span className="elite-step-icon">
-                      <Icon name="spark" size={22} />
-                    </span>
-                    <div className="elite-step-text">
-                      <small>DESTINATION</small>
-                      <b>Cercle Élite</b>
-                    </div>
-                  </button>
-                )
-              })()}
-            </div>
+              return (
+                <button
+                  key={lvl.id}
+                  type="button"
+                  role="tab"
+                  id={`route-tab-${lvl.id}`}
+                  aria-controls={`route-panel-${lvl.id}`}
+                  aria-selected={isActive}
+                  aria-label={nodeTitle}
+                  tabIndex={isActive ? 0 : -1}
+                  onClick={() => handleSelectLevel(i)}
+                  onKeyDown={(e) => handleKeyDown(e, i)}
+                  className={`route-node${isActive ? " is-active" : ""}${
+                    isPassed ? " is-passed" : ""
+                  }${lvl.isElite ? " is-elite" : ""}`}
+                >
+                  <span className="route-node__circle">{circleLabel}</span>
+                  <span className="route-node__label">
+                    {lvl.isElite ? "Cercle Élite" : lvl.level}
+                  </span>
+                  <span className="route-node__sub">
+                    {lvl.isElite ? "Destination" : lvl.subtitle}
+                  </span>
+                </button>
+              )
+            })}
           </div>
         </div>
 
-        {/* Detailed Short Info Card */}
+        {/* 3. Compact Info Panel */}
         <div
           id={`route-panel-${step.id}`}
           role="tabpanel"
           aria-labelledby={`route-tab-${step.id}`}
-          className="route-detail-card"
+          className="route-card"
         >
-          {/* Card Header */}
-          <div className="route-detail-header">
-            <div className="route-detail-badges">
-              <span className="route-badge-level">
-                {step.isElite ? (
-                  <>
-                    <Icon name="spark" size={14} /> CERCLE ÉLITE
-                  </>
-                ) : (
-                  `NIVEAU : ${step.level}`
-                )}
-              </span>
-              <span className="route-badge-counter">
-                Étape {activeLevel + 1} sur 8
-              </span>
-              <span className="route-badge-provisory">
-                Proposition éditoriale · En attente de validation
-              </span>
-            </div>
-            <h3 className="route-detail-title">
-              {step.isElite ? step.name : `${step.level} — ${step.name}`}
+          <div className="route-card__top">
+            <span className="route-card__kicker">NIVEAU SÉLECTIONNÉ</span>
+            <h3 className="route-card__title">
+              {step.isElite
+                ? "Cercle Élite"
+                : `${step.level} — ${step.subtitle}`}
             </h3>
-            <p className="route-detail-desc">{step.description}</p>
+            <p className="route-card__desc">{step.description}</p>
           </div>
 
-          {/* Card Body: Ce que tu vas apprendre & Objectif */}
-          <div className="route-detail-grid">
-            <div className="route-detail-box">
-              <div className="route-box-head">
-                <span className="route-box-icon">
-                  <Icon name="book" size={17} />
-                </span>
-                <small>CE QUE TU VAS APPRENDRE</small>
-              </div>
+          <div className="route-card__cols">
+            <div className="route-card__col">
+              <small>CE QUE TU VAS APPRENDRE</small>
               <p>{step.learning}</p>
             </div>
-
-            <div className="route-detail-box route-detail-box--highlight">
-              <div className="route-box-head">
-                <span className="route-box-icon">
-                  <Icon name="target" size={17} />
-                </span>
-                <small>OBJECTIF PÉDAGOGIQUE</small>
-              </div>
+            <div className="route-card__col">
+              <small>OBJECTIF PÉDAGOGIQUE</small>
               <p>{step.objective}</p>
             </div>
           </div>
 
-          {/* Navigation Controls inside Card */}
-          <div className="route-detail-nav">
+          <div className="route-card__nav">
             <button
               type="button"
-              className="route-nav-btn"
+              className="route-card__btn route-card__btn--prev"
               disabled={activeLevel === 0}
               onClick={() => handleSelectLevel(activeLevel - 1)}
               aria-label="Niveau précédent"
             >
-              ← Niveau précédent
+              <span aria-hidden="true">‹</span> Précédent
             </button>
-
-            <div className="route-nav-dots" aria-hidden="true">
-              {routeLevels.map((lvl, idx) => (
-                <span
-                  key={lvl.id}
-                  onClick={() => handleSelectLevel(idx)}
-                  className={`route-nav-dot ${
-                    idx === activeLevel ? "is-active" : ""
-                  }`}
-                  title={lvl.level}
-                />
-              ))}
-            </div>
-
             <button
               type="button"
-              className="route-nav-btn route-nav-btn--next"
+              className="route-card__btn route-card__btn--next"
               disabled={activeLevel === routeLevels.length - 1}
               onClick={() => handleSelectLevel(activeLevel + 1)}
               aria-label="Niveau suivant"
             >
-              Niveau suivant →
+              Suivant <span aria-hidden="true">›</span>
             </button>
           </div>
         </div>
@@ -1494,18 +1881,45 @@ const profiles = [
 ]
 
 function Profiles() {
+  const trackRef = useRef<HTMLDivElement | null>(null)
+  const dragState = useRef({ isDown: false, startX: 0, scrollLeft: 0 })
+
+  const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = trackRef.current
+    if (!el) return
+    dragState.current = {
+      isDown: true,
+      startX: e.pageX - el.offsetLeft,
+      scrollLeft: el.scrollLeft,
+    }
+  }
+
+  const onMouseLeaveOrUp = () => {
+    dragState.current.isDown = false
+  }
+
+  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!dragState.current.isDown) return
+    const el = trackRef.current
+    if (!el) return
+    e.preventDefault()
+    const x = e.pageX - el.offsetLeft
+    const walk = (x - dragState.current.startX) * 1.2
+    el.scrollLeft = dragState.current.scrollLeft - walk
+  }
+
   return (
-    <section id="profils" className="section profiles">
-      <div className="shell">
-        <div className="section-head section-head--split">
+    <section id="profils" className="section profiles profiles--harmonized">
+      <div className="shell profiles__shell">
+        <div className="section-head section-head--split profiles__head">
           <div>
-            <div className="eyebrow">
+            <div className="eyebrow eyebrow--light">
               <span /> Pour qui ?
             </div>
             <h2>
               Ton point de départ
               <br />
-              n’est pas une limite.
+              <em>n’est pas une limite.</em>
             </h2>
           </div>
           <p>
@@ -1513,15 +1927,24 @@ function Profiles() {
             comprendre ce que tu fais et pourquoi tu le fais.
           </p>
         </div>
+
         <div className="profiles-photo">
           <img
             src={profilePhoto}
             alt="Communauté d'apprenants et professionnels WÔY Academy"
           />
         </div>
-        <div className="profile-list">
+
+        <div
+          ref={trackRef}
+          className="profile-list profile-list--row"
+          onMouseDown={onMouseDown}
+          onMouseLeave={onMouseLeaveOrUp}
+          onMouseUp={onMouseLeaveOrUp}
+          onMouseMove={onMouseMove}
+        >
           {profiles.map(([number, title, text]) => (
-            <article key={title}>
+            <article key={title} className="profile-card">
               <span>{number}</span>
               <h3>{title}</h3>
               <p>{text}</p>
@@ -1535,9 +1958,17 @@ function Profiles() {
 
 function Fracture() {
   return (
-    <section className="section fracture">
-      <div className="shell">
-        <div className="section-head section-head--center section-head--dark">
+    <section className="fracture fracture-cinema">
+      <div className="fracture-cinema__stage">
+        <img
+          src="/fracture.png"
+          alt="Ahmadou apprend avec WÔY Academy tandis que Gassama investit sans méthode"
+          className="fracture-cinema__img"
+          loading="lazy"
+        />
+        <div className="fracture-cinema__shade" aria-hidden="true" />
+
+        <div className="fracture-cinema__head">
           <div className="eyebrow eyebrow--light">
             <span /> Comprendre avant d’agir
           </div>
@@ -1549,57 +1980,41 @@ function Fracture() {
             et comment protéger ton argent.
           </p>
         </div>
-        <div className="comparison">
-          <article className="comparison__good">
-            <div className="comparison__label">
-              <span>
-                <Icon name="shield" size={20} />
-              </span>
-              <h3>Avec WÔY</h3>
-              <small>UNE MÉTHODE POUR DÉCIDER</small>
-            </div>
-            {[
-              "Je comprends avant d’agir.",
-              "J’évalue les risques.",
-              "Je vérifie avant d’investir.",
-              "Je décide par moi-même.",
-            ].map((x) => (
-              <p key={x}>
-                <span>
-                  <Icon name="check" size={15} />
-                </span>
-                {x}
-              </p>
-            ))}
-          </article>
-          <div className="comparison__center">
-            <div className="comparison__vs-stage">
-              <img
-                src="/image-vs.png"
-                alt="Ahmadou avec méthode WÔY vs Gassama sans méthode"
-                className="comparison__vs-img"
-              />
-              <div className="versus">VS</div>
-            </div>
-          </div>
-          <article className="comparison__bad">
-            <div className="comparison__label">
-              <span>✕</span>
-              <h3>Sans méthode</h3>
-              <small>DES RÉFLEXES À QUESTIONNER</small>
-            </div>
-            {[
-              "Je suis les tendances.",
-              "Je crois aux promesses.",
-              "J’investis sans vérifier.",
-              "Je dépends des autres.",
-            ].map((x) => (
-              <p key={x}>
-                <span>✕</span>
-                {x}
-              </p>
-            ))}
-          </article>
+
+        <div className="fracture-pills fracture-pills--good" aria-label="Avec WÔY : une méthode pour décider">
+          {(
+            [
+              ["book", "Je comprends avant d’agir."],
+              ["shield", "J’évalue les risques."],
+              ["eye", "Je vérifie avant d’investir."],
+              ["target", "Je décide par moi-même."],
+            ] as [IconName, string][]
+          ).map(([icon, label]) => (
+            <span className="fracture-pill" key={label}>
+              <i>
+                <Icon name={icon} size={13} />
+              </i>
+              {label}
+            </span>
+          ))}
+        </div>
+
+        <div className="fracture-pills fracture-pills--bad" aria-label="Sans méthode : des réflexes à questionner">
+          {(
+            [
+              ["chart", "Je suis les tendances."],
+              ["spark", "Je crois aux promesses."],
+              ["wallet", "J’investis sans vérifier."],
+              ["community", "Je dépends des autres."],
+            ] as [IconName, string][]
+          ).map(([icon, label]) => (
+            <span className="fracture-pill" key={label}>
+              <i>
+                <Icon name={icon} size={13} />
+              </i>
+              {label}
+            </span>
+          ))}
         </div>
       </div>
     </section>
@@ -1711,28 +2126,22 @@ const values = [
 ]
 
 function Vision() {
-  const [isHovered, setIsHovered] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const sectionRef = useRef<HTMLElement | null>(null)
-
-  const cryptoItems = [
-    { name: "Bitcoin", sym: "BTC", icon: "\u20bf", cls: "crypto-badge--btc" },
-    { name: "Ethereum", sym: "ETH", icon: "\u25c6", cls: "crypto-badge--eth" },
-    { name: "Solana", sym: "SOL", icon: "\u25ce", cls: "crypto-badge--sol" },
-    { name: "Tether", sym: "USDT", icon: "\u20ae", cls: "crypto-badge--usdt" },
-  ]
 
   // Stop audio if user scrolls away from the section
   useEffect(() => {
     const handleScroll = () => {
       if (!sectionRef.current || !audioRef.current) return
       const rect = sectionRef.current.getBoundingClientRect()
-      const windowHeight = window.innerHeight || document.documentElement.clientHeight
-      
+      const windowHeight =
+        window.innerHeight || document.documentElement.clientHeight
+
       const isVisible = rect.top < windowHeight && rect.bottom > 0
       if (!isVisible && !audioRef.current.paused) {
         audioRef.current.pause()
-        audioRef.current.currentTime = 0
+        setIsPlaying(false)
       }
     }
 
@@ -1740,73 +2149,104 @@ function Vision() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const handleCauriTouch = () => {
-    setIsHovered(true)
-    if (!audioRef.current) return
-    if (audioRef.current.paused) {
-      audioRef.current.currentTime = 0
-      audioRef.current.play().catch(() => {})
+  const toggleCauriAudio = () => {
+    const audio = audioRef.current
+    if (!audio) return
+    if (audio.paused) {
+      audio
+        .play()
+        .then(() => setIsPlaying(true))
+        .catch(() => setIsPlaying(false))
+    } else {
+      audio.pause()
+      setIsPlaying(false)
     }
   }
 
   return (
-    <section id="vision" ref={sectionRef} className="section vision">
-      <audio ref={audioRef} src="/son-djeli.mp3" preload="auto" />
-      <div className="vision-pattern" />
-      <div className="shell">
+    <section
+      id="vision"
+      ref={sectionRef}
+      className="section vision vision--refined"
+    >
+      <audio
+        ref={audioRef}
+        src="/son-djeli.mp3"
+        preload="none"
+        onEnded={() => setIsPlaying(false)}
+        onPause={() => setIsPlaying(false)}
+        onPlay={() => setIsPlaying(true)}
+      />
+      <div className="vision-backdrop" aria-hidden="true" />
+      <div className="vision-pattern" aria-hidden="true" />
+
+      <div className="shell vision__shell">
+        {/* Left Column — 60% */}
         <div className="vision-copy">
           <div className="eyebrow eyebrow--light">
             <span /> Notre vision
           </div>
           <h2>
-            Hier, les Djelis
+            HIER, LES DJÉLIS
             <br />
-            transmettaient le savoir.<em>Aujourd'hui, WOY prend le relais.</em>
+            TRANSMETTAIENT LE SAVOIR.
+            <em>AUJOURD'HUI, WÔY PREND LE RELAIS.</em>
           </h2>
           <p>
-            Nous transmettons les connaissances financieres pour que chacun
-            puisse comprendre, decider et construire son avenir.
+            Nous transmettons les connaissances financières pour que chacun
+            puisse comprendre, décider et construire son avenir.
           </p>
         </div>
 
-        <div
-          className={`vision-cauri-stage ${isHovered ? "is-hovered" : ""}`}
-          onMouseEnter={handleCauriTouch}
-          onMouseLeave={() => setIsHovered(false)}
-          onClick={handleCauriTouch}
-        >
-          <div className="cauri-glow" />
-          <div className="cauri-light-halo" />
-
-          {/* Crypto badges that emerge on mouse hover / touch */}
-          <div className="crypto-badges-container">
-            {cryptoItems.map((item, idx) => (
-              <div
-                key={item.sym}
-                className={`crypto-popup-badge crypto-pos-${idx + 1} ${item.cls}`}
-              >
-                <span className="badge-icon">{item.icon}</span>
-                <span className="badge-name">{item.name}</span>
-                <span className="badge-sym">({item.sym})</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Floating Cauri with golden glow (no spin) */}
-          <div className="cauri-float-wrapper">
-            <img
-              src="/cauri.png"
-              alt="Cauri WOY"
-              className="cauri-float-img"
-            />
-          </div>
+        {/* Right Column — 40%: Interactive Golden Cauri */}
+        <div className="vision-cauri-col">
+          <button
+            type="button"
+            className={`vision-cauri-btn${isPlaying ? " is-playing" : ""}`}
+            onClick={toggleCauriAudio}
+            aria-pressed={isPlaying}
+            aria-label={
+              isPlaying
+                ? "Mettre en pause l'histoire de WÔY"
+                : "Touche le cauri pour écouter notre histoire"
+            }
+          >
+            <span className="cauri-soft-halo" aria-hidden="true" />
+            <span className="cauri-float-wrapper">
+              <img
+                src="/cauri.png"
+                alt="Cauri doré WÔY Academy"
+                className="cauri-float-img"
+              />
+            </span>
+            <span className="vision-cauri-caption">
+              <span className="vision-cauri-caption__icon" aria-hidden="true">
+                {isPlaying ? (
+                  <span className="vision-eq">
+                    <i />
+                    <i />
+                    <i />
+                  </span>
+                ) : (
+                  "♪"
+                )}
+              </span>
+              <span className="vision-cauri-caption__text">
+                {isPlaying
+                  ? "Histoire en cours · Touche pour mettre en pause"
+                  : "Touche le cauri pour écouter notre histoire"}
+              </span>
+            </span>
+          </button>
         </div>
       </div>
+
       <div className="values-marquee">
         <div>
-          Le savoir est l'elevation <span>&#183;</span> La maitrise est la liberte{" "}
-          <span>&#183;</span> La discipline est la cle <span>&#183;</span> La communaute
-          est notre force <span>&#183;</span> L'heritage est notre mission.
+          Le savoir est l'élévation <span>&#183;</span> La maîtrise est la
+          liberté <span>&#183;</span> La discipline est la clé{" "}
+          <span>&#183;</span> La communauté est notre force <span>&#183;</span>{" "}
+          L'héritage est notre mission.
         </div>
       </div>
     </section>
