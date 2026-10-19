@@ -1,0 +1,9 @@
+
+{
+  "title": "WOY Academy",
+  "description": "Plateforme WOY Academy",
+  "language": "fr",
+  "robots": {
+    "index": true
+  }
+}
