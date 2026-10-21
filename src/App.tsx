@@ -1981,40 +1981,42 @@ function Fracture() {
           </p>
         </div>
 
-        <div className="fracture-pills fracture-pills--good" aria-label="Avec WÔY : une méthode pour décider">
-          {(
-            [
-              ["book", "Je comprends avant d’agir."],
-              ["shield", "J’évalue les risques."],
-              ["eye", "Je vérifie avant d’investir."],
-              ["target", "Je décide par moi-même."],
-            ] as [IconName, string][]
-          ).map(([icon, label]) => (
-            <span className="fracture-pill" key={label}>
-              <i>
-                <Icon name={icon} size={13} />
-              </i>
-              {label}
-            </span>
-          ))}
-        </div>
+        <div className="fracture-pills-pair">
+          <div className="fracture-pills fracture-pills--good" aria-label="Avec WÔY : une méthode pour décider">
+            {(
+              [
+                ["book", "Je comprends avant d’agir."],
+                ["shield", "J’évalue les risques."],
+                ["eye", "Je vérifie avant d’investir."],
+                ["target", "Je décide par moi-même."],
+              ] as [IconName, string][]
+            ).map(([icon, label]) => (
+              <span className="fracture-pill" key={label}>
+                <i>
+                  <Icon name={icon} size={13} />
+                </i>
+                {label}
+              </span>
+            ))}
+          </div>
 
-        <div className="fracture-pills fracture-pills--bad" aria-label="Sans méthode : des réflexes à questionner">
-          {(
-            [
-              ["chart", "Je suis les tendances."],
-              ["spark", "Je crois aux promesses."],
-              ["wallet", "J’investis sans vérifier."],
-              ["community", "Je dépends des autres."],
-            ] as [IconName, string][]
-          ).map(([icon, label]) => (
-            <span className="fracture-pill" key={label}>
-              <i>
-                <Icon name={icon} size={13} />
-              </i>
-              {label}
-            </span>
-          ))}
+          <div className="fracture-pills fracture-pills--bad" aria-label="Sans méthode : des réflexes à questionner">
+            {(
+              [
+                ["chart", "Je suis les tendances."],
+                ["spark", "Je crois aux promesses."],
+                ["wallet", "J’investis sans vérifier."],
+                ["community", "Je dépends des autres."],
+              ] as [IconName, string][]
+            ).map(([icon, label]) => (
+              <span className="fracture-pill" key={label}>
+                <i>
+                  <Icon name={icon} size={13} />
+                </i>
+                {label}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -2149,7 +2151,7 @@ function Vision() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const toggleCauriAudio = () => {
+  const toggleVisionAudio = () => {
     const audio = audioRef.current
     if (!audio) return
     if (audio.paused) {
@@ -2181,7 +2183,6 @@ function Vision() {
       <div className="vision-pattern" aria-hidden="true" />
 
       <div className="shell vision__shell">
-        {/* Left Column — 60% */}
         <div className="vision-copy">
           <div className="eyebrow eyebrow--light">
             <span /> Notre vision
@@ -2196,46 +2197,46 @@ function Vision() {
             Nous transmettons les connaissances financières pour que chacun
             puisse comprendre, décider et construire son avenir.
           </p>
-        </div>
 
-        {/* Right Column — 40%: Interactive Golden Cauri */}
-        <div className="vision-cauri-col">
           <button
             type="button"
-            className={`vision-cauri-btn${isPlaying ? " is-playing" : ""}`}
-            onClick={toggleCauriAudio}
+            className={`vision-audio-guide${isPlaying ? " is-playing" : ""}`}
+            onClick={toggleVisionAudio}
             aria-pressed={isPlaying}
             aria-label={
               isPlaying
-                ? "Mettre en pause l'histoire de WÔY"
-                : "Touche le cauri pour écouter notre histoire"
+                ? "Mettre en pause le son de notre histoire"
+                : "Clique ici pour écouter notre histoire"
             }
           >
-            <span className="cauri-soft-halo" aria-hidden="true" />
-            <span className="cauri-float-wrapper">
-              <img
-                src="/cauri.png"
-                alt="Cauri doré WÔY Academy"
-                className="cauri-float-img"
-              />
+            <span className="vision-audio-guide__icon" aria-hidden="true">
+              {isPlaying ? (
+                <span className="vision-eq">
+                  <i />
+                  <i />
+                  <i />
+                </span>
+              ) : (
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                </svg>
+              )}
             </span>
-            <span className="vision-cauri-caption">
-              <span className="vision-cauri-caption__icon" aria-hidden="true">
-                {isPlaying ? (
-                  <span className="vision-eq">
-                    <i />
-                    <i />
-                    <i />
-                  </span>
-                ) : (
-                  "♪"
-                )}
-              </span>
-              <span className="vision-cauri-caption__text">
-                {isPlaying
-                  ? "Histoire en cours · Touche pour mettre en pause"
-                  : "Touche le cauri pour écouter notre histoire"}
-              </span>
+            <span className="vision-audio-guide__text">
+              {isPlaying
+                ? "Écoute en cours · Clique ici pour mettre en pause"
+                : "Clique ici pour écouter l’histoire audio de WÔY"}
             </span>
           </button>
         </div>
@@ -2653,7 +2654,6 @@ export default function App() {
       <Route />
       <Profiles />
       <Fracture />
-      <WhyWoy />
       <Vision />
       <FinalCTA onOpenReservation={() => setIsReservationOpen(true)} />
       <Footer />
