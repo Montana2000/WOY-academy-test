@@ -361,9 +361,11 @@ function DashboardMockup() {
 function VideoModal({
   isOpen,
   onClose,
+  onOpenReservation,
 }: {
   isOpen: boolean
   onClose: () => void
+  onOpenReservation?: () => void
 }) {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -396,42 +398,40 @@ function VideoModal({
           type="button"
           aria-label="Fermer la vidéo"
         >
-          <Icon name="close" size={20} />
+          <Icon name="close" size={18} />
         </button>
         <div className="video-modal-screen">
-          <img
-            src="/hero-laptop.png"
-            alt="L'histoire d'Ahmadou · Épisode 1"
-            className="video-poster"
-          />
-          <div className="video-play-overlay">
-            <a
-              href="#histoire"
-              className="big-play-btn"
-              onClick={onClose}
-              aria-label="Lancer l'histoire"
-            >
-              <Icon name="play" size={28} />
-            </a>
-            <p>Bande-annonce · 2 min</p>
-          </div>
+          <video
+            src="/woy-vid-45s.mp4"
+            poster="/hero-section-2.png"
+            className="video-player"
+            controls
+            autoPlay
+            playsInline
+          >
+            Votre navigateur ne prend pas en charge la lecture vidéo.
+          </video>
         </div>
         <div className="video-modal-info">
-          <div className="video-modal-tag">Épisode 1 · 2 min</div>
-          <h3>L'histoire d'Ahmadou</h3>
-          <p>
-            Suis Ahmadou dans ses premières décisions financières. Apprends à
-            reconnaître les marchés, comprendre les risques et faire tes
-            propres choix.
-          </p>
+          <div className="video-modal-copy">
+            <div className="video-modal-tag">Épisode 1 · 45 s</div>
+            <h3>L'histoire d'Amadou</h3>
+            <p>
+              Suis Amadou dans ses premières décisions financières et apprends à
+              reconnaître les risques avant d’agir.
+            </p>
+          </div>
           <div className="video-modal-actions">
-            <a
-              href="#attente"
+            <button
+              type="button"
               className="button button--primary"
-              onClick={onClose}
+              onClick={() => {
+                onClose()
+                onOpenReservation?.()
+              }}
             >
               Réserve ta place <Icon name="arrow" size={16} />
-            </a>
+            </button>
             <a
               href="#histoire"
               className="button button--secondary"
@@ -455,7 +455,7 @@ function Hero({ onOpenReservation }: { onOpenReservation?: () => void }) {
         <div className="hero-cinema__stage">
           {/* 16:9 Background Image */}
           <img
-            src="/hero-laptop.png"
+            src="/hero-section-2.png"
             alt="Plateforme WÔY Academy"
             className="hero-cinema__canvas-img"
           />
@@ -466,10 +466,10 @@ function Hero({ onOpenReservation }: { onOpenReservation?: () => void }) {
           {/* Pulsing Light Golden Circle EXACTLY over the play button in the character's hand */}
           <button
             type="button"
-            className="hero-play-hotspot"
+            className="hero-play-hotspot hero-play-hotspot--desktop"
             onClick={() => setIsVideoOpen(true)}
-            aria-label="Voir le film · 2 min"
-            title="Voir le film · 2 min"
+            aria-label="Voir la vidéo de 45 s"
+            title="Voir la vidéo de 45 s"
           >
             <span className="hero-pulse-ripple" />
             <span className="hero-pulse-ring" />
@@ -507,7 +507,7 @@ function Hero({ onOpenReservation }: { onOpenReservation?: () => void }) {
                 <span className="cinema-play-badge">
                   <Icon name="play" size={13} />
                 </span>
-                <span>VOIR LE FILM · 2 MIN</span>
+                <span>VOIR LA VIDÉO · 45 S</span>
               </button>
             </div>
           </div>
@@ -515,16 +515,16 @@ function Hero({ onOpenReservation }: { onOpenReservation?: () => void }) {
           {/* Dedicated mobile media frame for small screens */}
           <div className="hero-cinema__mobile-media">
             <img
-              src="/hero-laptop.png"
+              src="/hero-section-2.png"
               alt="Plateforme WÔY Academy sur ordinateur"
               className="hero-cinema__mobile-img"
               loading="eager"
             />
             <button
               type="button"
-              className="hero-play-hotspot"
+              className="hero-play-hotspot hero-play-hotspot--mobile"
               onClick={() => setIsVideoOpen(true)}
-              aria-label="Voir le film · 2 min"
+              aria-label="Voir la vidéo de 45 s"
             >
               <span className="hero-pulse-ripple" />
               <span className="hero-pulse-ring" />
@@ -537,6 +537,7 @@ function Hero({ onOpenReservation }: { onOpenReservation?: () => void }) {
       <VideoModal
         isOpen={isVideoOpen}
         onClose={() => setIsVideoOpen(false)}
+        onOpenReservation={onOpenReservation}
       />
     </>
   )
@@ -719,7 +720,7 @@ function LaambInterface() {
           <div className="laamb-fighter">
             <span className="fighter-avatar">A</span>
             <div>
-              <b>Ahmadou</b>
+              <b>Amadou</b>
               <small>Niv. 2 · Explorateur</small>
             </div>
             <span className="fighter-score">1 420 pts</span>
@@ -745,7 +746,7 @@ function LaambInterface() {
             <span className="choice-check">&#10003;</span>
             <div>
               <b>Appliquer le plan et évaluer le risque</b>
-              <small>Ahmadou · Réponse validée</small>
+              <small>Amadou · Réponse validée</small>
             </div>
             <span className="choice-xp">+50 XP</span>
           </div>
@@ -1001,7 +1002,7 @@ function PillarLaambPreview() {
       <div className="pp-laamb-duel">
         <div className="pp-laamb-player">
           <span className="pp-laamb-avatar pp-laamb-avatar--gold">A</span>
-          <b>Ahmadou</b>
+          <b>Amadou</b>
         </div>
         <span className="pp-laamb-vs">VS</span>
         <div className="pp-laamb-player pp-laamb-player--right">
@@ -1151,7 +1152,7 @@ function MethodCardVisual({ num }: { num: string }) {
       <div className="ms-visual ms-visual--story">
         <img
           src="/ahmadou.png"
-          alt="Ahmadou dans une situation narrative"
+          alt="Amadou dans une situation narrative"
           className="ms-story-img"
           loading="lazy"
         />
@@ -1394,7 +1395,7 @@ const narrativeCharacters = [
   },
   {
     id: "ahmadou",
-    name: "Ahmadou",
+    name: "Amadou",
     role: "L'apprenant",
     img: "/ahmadou.png",
     featured: true,
@@ -1429,7 +1430,7 @@ function Narrative() {
   }
 
   return (
-    <section className="section narrative-compact">
+    <section id="histoire" className="section narrative-compact">
       <div className="shell narrative-compact__shell">
         {/* Compact Header */}
         <div className="narrative-compact__head">
@@ -1438,7 +1439,7 @@ function Narrative() {
             <em>Des décisions pour apprendre.</em>
           </h2>
           <p>
-            Avec Ahmadou, Gassama et Djéli, découvre des situations financières
+            Avec Amadou, Gassama et Djéli, découvre des situations financières
             concrètes et apprends à faire les bons choix.
           </p>
         </div>
@@ -1486,21 +1487,21 @@ function Narrative() {
               <span className="narrative-sim__tag">
                 DÉMONSTRATION PÉDAGOGIQUE
               </span>
-              <h3>Ahmadou face à une décision financière</h3>
+              <h3>Amadou face à une décision financière</h3>
               <p className="narrative-sim__story">
-                « Ahmadou reçoit une prime de <b>250 000 FCFA</b>. Gassama lui
+                « Amadou reçoit une prime de <b>250 000 FCFA</b>. Gassama lui
                 propose un placement présenté comme sans risque. »
               </p>
             </div>
 
             <div className="narrative-sim__question-block">
               <p className="narrative-sim__question">
-                Que devrait faire Ahmadou ?
+                Que devrait faire Amadou ?
               </p>
               <div
                 className="narrative-sim__choices"
                 role="radiogroup"
-                aria-label="Que devrait faire Ahmadou ?"
+                aria-label="Que devrait faire Amadou ?"
               >
                 {narrativeChoices.map((choice, idx) => {
                   const isSelected = selected === idx
@@ -1690,7 +1691,7 @@ const routeLevels: RouteLevel[] = [
 ]
 
 function Route() {
-  const [activeLevel, setActiveLevel] = useState(2)
+  const [activeLevel, setActiveLevel] = useState(0)
   const timelineRef = useRef<HTMLDivElement | null>(null)
   const step = routeLevels[activeLevel]
 
@@ -1962,7 +1963,7 @@ function Fracture() {
       <div className="fracture-cinema__stage">
         <img
           src="/fracture.png"
-          alt="Ahmadou apprend avec WÔY Academy tandis que Gassama investit sans méthode"
+          alt="Amadou apprend avec WÔY Academy tandis que Gassama investit sans méthode"
           className="fracture-cinema__img"
           loading="lazy"
         />
@@ -2205,8 +2206,8 @@ function Vision() {
             aria-pressed={isPlaying}
             aria-label={
               isPlaying
-                ? "Mettre en pause le son de notre histoire"
-                : "Clique ici pour écouter notre histoire"
+                ? "Mettre en pause l'histoire des Djélis"
+                : "Clique ici pour connaître l'histoire des Djélis"
             }
           >
             <span className="vision-audio-guide__icon" aria-hidden="true">
@@ -2218,12 +2219,12 @@ function Vision() {
                 </span>
               ) : (
                 <svg
-                  width="18"
-                  height="18"
+                  width="13"
+                  height="13"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="2"
+                  strokeWidth="2.1"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 >
@@ -2235,8 +2236,8 @@ function Vision() {
             </span>
             <span className="vision-audio-guide__text">
               {isPlaying
-                ? "Écoute en cours · Clique ici pour mettre en pause"
-                : "Clique ici pour écouter l’histoire audio de WÔY"}
+                ? "Écoute en cours · Mettre en pause"
+                : "Clique ici pour connaître l’histoire des Djélis"}
             </span>
           </button>
         </div>
@@ -2498,9 +2499,6 @@ function ReservationModal({
             >
               Retour au site
             </button>
-            <p className="reservation-disclaimer">
-              Démonstration — aucune inscription réelle
-            </p>
           </div>
         ) : (
           <div className="reservation-body">
@@ -2590,10 +2588,6 @@ function ReservationModal({
                 )}
               </button>
             </form>
-
-            <p className="reservation-disclaimer">
-              Démonstration — aucune inscription réelle
-            </p>
           </div>
         )}
       </div>
