@@ -131,7 +131,7 @@ function Logo({ light = false }: { light?: boolean }) {
   return (
     <div className="logo-brand" aria-label="WÔY Academy">
       <img
-        src="/logo-woy.png"
+        src="/logo-woy-v2.png"
         alt="WÔY Academy"
         className="logo-brand__img"
       />
@@ -480,7 +480,7 @@ function Hero({ onOpenReservation }: { onOpenReservation?: () => void }) {
           <div className="hero-cinema__canvas-content">
             <div className="hero-cinema__brand-mark">
               <img
-                src="/woy-hero.webp"
+                src="/woy-hero.png"
                 alt="WÔY"
                 className="hero-cinema__woy-img"
               />
