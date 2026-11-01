@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react"
 
-const profilePhoto = "/cible-woy.png"
+const profilePhoto = "/cible-woy-02.png"
 
 type IconName = "arrow" | "book" | "chart" | "check" | "chevron" | "clock" | "close" | "community" | "document" | "eye" | "facebook" | "instagram" | "menu" | "play" | "shield" | "spark" | "target" | "wallet" | "youtube"
 
@@ -131,7 +131,7 @@ function Logo({ light = false }: { light?: boolean }) {
   return (
     <div className="logo-brand" aria-label="WÔY Academy">
       <img
-        src="/logo-woy-v2.png"
+        src="/logo-header-footer.gif"
         alt="WÔY Academy"
         className="logo-brand__img"
       />
@@ -145,7 +145,6 @@ const navItems = [
   ["Notre méthode", "methode"],
   ["La Route", "route"],
   ["Pour qui ?", "profils"],
-  ["Notre vision", "vision"],
 ]
 
 function ButtonLink({
@@ -403,7 +402,7 @@ function VideoModal({
         <div className="video-modal-screen">
           <video
             src="/woy-vid-45s.mp4"
-            poster="/hero-section-2.png"
+            poster="/woy-hero-image.png?v=pub"
             className="video-player"
             controls
             autoPlay
@@ -455,7 +454,7 @@ function Hero({ onOpenReservation }: { onOpenReservation?: () => void }) {
         <div className="hero-cinema__stage">
           {/* 16:9 Background Image */}
           <img
-            src="/hero-section-2.png"
+            src="/woy-hero-image.png?v=pub"
             alt="Plateforme WÔY Academy"
             className="hero-cinema__canvas-img"
           />
@@ -480,7 +479,7 @@ function Hero({ onOpenReservation }: { onOpenReservation?: () => void }) {
           <div className="hero-cinema__canvas-content">
             <div className="hero-cinema__brand-mark">
               <img
-                src="/woy-hero.png"
+                src="/woy-hero-clean.png?v=point2"
                 alt="WÔY"
                 className="hero-cinema__woy-img"
               />
@@ -515,7 +514,7 @@ function Hero({ onOpenReservation }: { onOpenReservation?: () => void }) {
           {/* Dedicated mobile media frame for small screens */}
           <div className="hero-cinema__mobile-media">
             <img
-              src="/hero-section-2.png"
+              src="/woy-hero-image.png?v=pub"
               alt="Plateforme WÔY Academy sur ordinateur"
               className="hero-cinema__mobile-img"
               loading="eager"
@@ -1055,64 +1054,225 @@ function PillarLaambPreview() {
 const pillars = [
   {
     number: "01",
+    tag: "APPRENDRE",
     icon: "book-open" as PillarIconType,
     title: "Parcours pédagogique",
+    shortTitle: "Parcours",
     description: "Des cours progressifs, concrets et adaptés à ton niveau.",
+    highlights: [
+      "Modules interactifs structurés du débutant à l'avancé",
+      "Quiz de validation après chaque leçon",
+      "Suivi de progression clair et visuel",
+    ],
     ui: <PillarParcoursPreview />,
   },
   {
     number: "02",
+    tag: "S'ENTRAÎNER",
     icon: "chart-up" as PillarIconType,
     title: "Portefeuille simulé",
+    shortTitle: "Portefeuille",
     description:
       "Entraîne-toi sans risque financier réel avec des conditions de marché simulées.",
+    highlights: [
+      "1 250 000 FCFA de capital virtuel pour tester tes idées",
+      "Données et variations réalistes en temps réel",
+      "Diversification et analyse de rentabilité sans stress",
+    ],
     ui: <PillarPortfolioPreview />,
   },
   {
     number: "03",
+    tag: "ANALYSER",
     icon: "doc-analysis" as PillarIconType,
     title: "Rapports mensuels",
+    shortTitle: "Rapports",
     description:
       "Des analyses claires pour comprendre les tendances et les risques des marchés.",
+    highlights: [
+      "Décryptages macro & crypto sans jargon inutile",
+      "Identification des tendances clés et pièges à éviter",
+      "Synthèses mensuelles téléchargeables en PDF",
+    ],
     ui: <PillarReportPreview />,
   },
   {
     number: "04",
+    tag: "CONFRONTER",
     icon: "trophy" as PillarIconType,
     title: "Arène des Traders",
+    shortTitle: "Arène LAAMB",
     description:
       "Défie d'autres traders et confronte tes stratégies dans une compétition simulée.",
+    highlights: [
+      "Duels en direct sous tension de marché",
+      "Gagne des points de prestige et monte au classement",
+      "Compare tes prises de décision avec la communauté",
+    ],
     ui: <PillarLaambPreview />,
   },
 ]
 
 function Platform() {
+  const [current, setCurrent] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
+  const total = pillars.length
+  const touchStartX = useRef<number | null>(null)
+  const touchEndX = useRef<number | null>(null)
+
+  const goTo = (index: number) => {
+    const next = (index + total) % total
+    setCurrent(next)
+  }
+
+  // 2-second automatic sliding, paused on hover and touch
+  useEffect(() => {
+    if (isPaused) return
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % total)
+    }, 2000)
+    return () => clearInterval(timer)
+  }, [isPaused, total])
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const activeEl = document.activeElement
+      if (activeEl && (activeEl.tagName === "INPUT" || activeEl.tagName === "TEXTAREA")) return
+      if (e.key === "ArrowLeft") goTo(current - 1)
+      if (e.key === "ArrowRight") goTo(current + 1)
+    }
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [current, total])
+
+  // Touch gesture handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsPaused(true)
+    touchStartX.current = e.touches[0].clientX
+    touchEndX.current = e.touches[0].clientX
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX
+  }
+
+  const handleTouchEnd = () => {
+    setIsPaused(false)
+    if (touchStartX.current !== null && touchEndX.current !== null) {
+      const diff = touchStartX.current - touchEndX.current
+      if (Math.abs(diff) > 40) {
+        if (diff > 0) {
+          goTo(current + 1)
+        } else {
+          goTo(current - 1)
+        }
+      }
+    }
+    touchStartX.current = null
+    touchEndX.current = null
+  }
+
   return (
-    <section id="plateforme" className="section platform-pillars">
-      <div className="shell platform-pillars__shell">
-        <div className="platform-pillars__head">
-          <h2>
-            Une plateforme, <em>quatre piliers.</em>
-          </h2>
-          <p>
-            Un parcours complet pour apprendre la finance, s'entraîner sur les
-            marchés, comprendre les analyses et relever des défis de trading.
-          </p>
+    <section id="plateforme" className="platform-fullscreen">
+      {/* Background ambient lighting */}
+      <div className="platform-fs__ambient-glow" aria-hidden="true" />
+
+      {/* Section Header */}
+      <div className="platform-fs__head shell">
+        <span className="platform-fs__badge">ÉCOSYSTÈME COMPLET</span>
+        <h2>
+          Une plateforme, <em>quatre piliers.</em>
+        </h2>
+        <p>
+          Un parcours complet pour apprendre la finance, s'entraîner sur les
+          marchés, comprendre les analyses et relever des défis de trading.
+        </p>
+      </div>
+
+      {/* Fullscreen Slider Stage with 2-second hover pause */}
+      <div
+        className="platform-fs__stage"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        <div className="platform-fs__track-wrapper">
+          <div
+            className="platform-fs__track"
+            style={{ transform: `translateX(-${current * 100}%)` }}
+          >
+            {pillars.map((pillar, i) => {
+              const isActive = i === current
+              return (
+                <div
+                  className={`platform-fs__slide${isActive ? " is-active" : ""}`}
+                  key={pillar.title}
+                  aria-hidden={!isActive}
+                >
+                  <article className="pillar-card pillar-card--fullscreen">
+                    {/* Top / Left meta column */}
+                    <div className="pillar-card__info">
+                      <div className="pillar-card__tag-row">
+                        <span className="pillar-card__tag">PILIER {pillar.number} · {pillar.tag}</span>
+                      </div>
+
+                      <div className="pillar-card__title-row">
+                        <span className="pillar-card__icon" aria-hidden="true">
+                          <PillarHeaderIcon type={pillar.icon} />
+                        </span>
+                        <h3>{pillar.title}</h3>
+                      </div>
+
+                      <p className="pillar-card__desc">{pillar.description}</p>
+
+                      <ul className="pillar-card__highlights">
+                        {pillar.highlights.map((h, hIdx) => (
+                          <li key={hIdx}>
+                            <span className="pillar-card__hl-check" aria-hidden="true">✓</span>
+                            <span>{h}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Preview UI column */}
+                    <div className="pillar-card__preview-col">
+                      <div className="pillar-card__preview-box">
+                        {pillar.ui}
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              )
+            })}
+          </div>
         </div>
-        <div className="pillars-grid">
-          {pillars.map((pillar) => (
-            <article className="pillar-card" key={pillar.title}>
-              <div className="pillar-card__top">
-                <span className="pillar-card__icon">
-                  <PillarHeaderIcon type={pillar.icon} />
-                </span>
-                <h3>{pillar.title}</h3>
-                <p>{pillar.description}</p>
-              </div>
-              <div className="pillar-card__preview">{pillar.ui}</div>
-            </article>
-          ))}
-        </div>
+
+        {/* Side Navigation Arrows (Desktop & Mobile) */}
+        <button
+          className="platform-fs__arrow platform-fs__arrow--side platform-fs__arrow--prev"
+          onClick={() => goTo(current - 1)}
+          aria-label="Pilier précédent"
+          type="button"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+            <path d="m15 18-6-6 6-6" />
+          </svg>
+        </button>
+
+        <button
+          className="platform-fs__arrow platform-fs__arrow--side platform-fs__arrow--next"
+          onClick={() => goTo(current + 1)}
+          aria-label="Pilier suivant"
+          type="button"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </button>
       </div>
     </section>
   )
@@ -1690,161 +1850,303 @@ const routeLevels: RouteLevel[] = [
   },
 ]
 
+interface RouteStep {
+  id: string
+  level: string
+  subtitle: string
+  nodeX: number
+  nodeY: number
+  badgeX: number
+  badgeY: number
+  description: string
+  learning: string
+  objective: string
+  isElite?: boolean
+}
+
+const routeMapSteps: RouteStep[] = [
+  {
+    id: "n0",
+    level: "N0",
+    subtitle: "DÉCOUVERTE",
+    nodeX: 48.0,
+    nodeY: 89.0,
+    badgeX: 61.0,
+    badgeY: 89.0,
+    description: "Comprendre les bases de l’argent, du risque et de la prise de décision financière.",
+    learning: "Le rôle de la monnaie, l'épargne, l'inflation et les premiers pièges à éviter.",
+    objective: "Poser des bases saines et lucides avant d'engager le moindre franc.",
+  },
+  {
+    id: "n1",
+    level: "N1",
+    subtitle: "SÉCURITÉ TOTALE",
+    nodeX: 51.0,
+    nodeY: 72.0,
+    badgeX: 37.0,
+    badgeY: 72.0,
+    description: "Identifier les arnaques, protéger son capital et adopter les bons réflexes de sécurité.",
+    learning: "Sécurisation des portefeuilles, détection des faux rendements et gestion des clés.",
+    objective: "Construire un bouclier impénétrable avant toute opération.",
+  },
+  {
+    id: "n2",
+    level: "N2",
+    subtitle: "FONDAMENTAUX",
+    nodeX: 45.8,
+    nodeY: 60.5,
+    badgeX: 59.0,
+    badgeY: 60.5,
+    description: "Comprendre le fonctionnement des actifs, de la crypto et des marchés financiers.",
+    learning: "Actifs réels vs volatils, fonctionnement de la blockchain, rôle des marchés.",
+    objective: "Savoir ce que l'on achète et pourquoi on l'achète.",
+  },
+  {
+    id: "n3",
+    level: "N3",
+    subtitle: "LIRE LE MARCHÉ",
+    nodeX: 52.6,
+    nodeY: 51.5,
+    badgeX: 38.5,
+    badgeY: 51.5,
+    description: "Analyser les tendances, lire les graphiques et interpréter les cycles économiques.",
+    learning: "Supports, résistances, volumes, cycles haussiers et baissiers.",
+    objective: "Développer une lecture objective sans se laisser submerger par le bruit.",
+  },
+  {
+    id: "n4",
+    level: "N4",
+    subtitle: "DÉCISION & EXÉCUTION",
+    nodeX: 46.0,
+    nodeY: 42.5,
+    badgeX: 60.0,
+    badgeY: 42.5,
+    description: "Définir un plan clair, calculer ses ratios risque/rendement et exécuter sans hésitation.",
+    learning: "Plan d'investissement, stop-loss, take-profit et dimensionnement des positions.",
+    objective: "Prendre des décisions mesurées basées sur des règles strictes.",
+  },
+  {
+    id: "n5",
+    level: "N5",
+    subtitle: "RISK & PORTEFEUILLE",
+    nodeX: 50.5,
+    nodeY: 35.8,
+    badgeX: 37.0,
+    badgeY: 35.8,
+    description: "Structurer un portefeuille équilibré, diversifié et résilient face aux tempêtes.",
+    learning: "Allocation d'actifs, corrélation des marchés et gestion du risque global.",
+    objective: "Préserver et faire croître son capital sur la durée.",
+  },
+  {
+    id: "n6",
+    level: "N6",
+    subtitle: "MAÎTRISE PRO",
+    nodeX: 54.8,
+    nodeY: 29.5,
+    badgeX: 65.5,
+    badgeY: 29.5,
+    description: "Affiner sa psychologie, maîtriser ses émotions et automatiser ses protocoles.",
+    learning: "Gestion du stress, analyse avancée, routines des opérateurs professionnels.",
+    objective: "Atteindre la constance et la discipline des investisseurs avertis.",
+  },
+  {
+    id: "elite",
+    level: "ÉLITE",
+    subtitle: "CERCLE ÉLITE",
+    nodeX: 52.5,
+    nodeY: 22.5,
+    badgeX: 63.5,
+    badgeY: 22.5,
+    description: "Intégrer le cercle restreint des mentors, partager son expertise et impacter sa communauté.",
+    learning: "Stratégies institutionnelles, mentorat, transmission du savoir économique.",
+    objective: "Transmettre et élever son entourage grâce à l'autonomie financière acquise.",
+    isElite: true,
+  },
+]
+
 function Route() {
   const [activeLevel, setActiveLevel] = useState(0)
-  const timelineRef = useRef<HTMLDivElement | null>(null)
-  const step = routeLevels[activeLevel]
+  const [hoveredLevel, setHoveredLevel] = useState<number | null>(null)
+  const displayIndex = hoveredLevel !== null ? hoveredLevel : activeLevel
+  const step = routeMapSteps[displayIndex]
 
   const handleSelectLevel = (index: number) => {
-    const clamped = Math.max(0, Math.min(routeLevels.length - 1, index))
+    const clamped = Math.max(0, Math.min(routeMapSteps.length - 1, index))
     setActiveLevel(clamped)
-
-    // Smoothly center the active step inside the horizontal timeline without scrolling the page
-    const container = timelineRef.current
-    if (container) {
-      const buttons = container.querySelectorAll<HTMLElement>(".route-node")
-      const target = buttons[clamped]
-      if (target) {
-        const scrollTarget =
-          target.offsetLeft -
-          container.clientWidth / 2 +
-          target.offsetWidth / 2
-        container.scrollTo({
-          left: Math.max(0, scrollTarget),
-          behavior: "smooth",
-        })
-      }
-    }
   }
-
-  const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault()
-      handleSelectLevel(index)
-    } else if (e.key === "ArrowRight") {
-      e.preventDefault()
-      handleSelectLevel(Math.min(routeLevels.length - 1, index + 1))
-    } else if (e.key === "ArrowLeft") {
-      e.preventDefault()
-      handleSelectLevel(Math.max(0, index - 1))
-    }
-  }
-
-  const progressPercent = (activeLevel / (routeLevels.length - 1)) * 100
 
   return (
-    <section id="route" className="section route-compact">
-      <div className="shell route-compact__shell">
-        {/* 1. Compact Header */}
-        <div className="route-compact__head">
-          <div className="route-compact__head-text">
-            <span className="route-compact__eyebrow">LA ROUTE WÔY</span>
-            <h2>Une progression à ton rythme.</h2>
-            <p>
-              De N0 à N6, construis tes connaissances étape par étape, jusqu’au
-              Cercle Élite.
-            </p>
-          </div>
+    <section id="route" className="route-interactive-section">
+      <div className="route-interactive__stage">
+        {/* Background Illustrated Route Landscape — ROUTE OG with crystal-clear native text & icons */}
+        <img
+          src="/ROUTE OG.png"
+          alt="La Route WÔY — Carte panoramique des 8 niveaux"
+          className="route-interactive__bg-img"
+        />
+
+        {/* Ambient atmospheric vignetting */}
+        <div className="route-interactive__vignette" aria-hidden="true" />
+
+        {/* 2. LEFT EDITORIAL BLOCK — Simple, compact, and space-saving */}
+        <div className="route-interactive__editorial route-interactive__editorial--compact">
+          <span className="route-editorial__kicker">LA ROUTE WÔY</span>
+
+          <h2 className="route-editorial__title-compact">
+            UNE ROUTE. DES NIVEAUX.<br />
+            <em>UNE TRANSFORMATION.</em>
+          </h2>
+
+          <p className="route-editorial__lead-compact">
+            De N0 à Cercle Élite, franchis chaque étape à ton rythme.
+          </p>
+
+          <ul className="route-editorial__features">
+            <li>
+              <span className="route-editorial__feat-check">✓</span>
+              <span>Progression pas à pas</span>
+            </li>
+            <li>
+              <span className="route-editorial__feat-check">✓</span>
+              <span>Gestion du risque &amp; sécurité</span>
+            </li>
+            <li>
+              <span className="route-editorial__feat-check">✓</span>
+              <span>Maîtrise &amp; transmission</span>
+            </li>
+          </ul>
+
+          <p className="route-editorial__quote-compact">
+            &ldquo;Le savoir est une arme, la méthode ton bouclier.&rdquo;
+            <small>— DJÉLI WÔY</small>
+          </p>
         </div>
 
-        {/* 2. Horizontal 8-step Timeline */}
+        {/* 1 & 2. INTERACTIVE STEPS LAYER — Pedestal hotspot with animation + permanent text pill badge */}
         <div
-          ref={timelineRef}
-          className="route-timeline"
+          className="route-interactive__hotspots"
           role="tablist"
-          aria-label="Parcours pédagogique de la Route WÔY"
+          aria-label="Sélectionner une étape de la Route"
         >
-          <div className="route-timeline__track">
-            <div className="route-timeline__line" aria-hidden="true">
-              <div
-                className="route-timeline__line-fill"
-                style={{ width: `${progressPercent}%` }}
-              />
-            </div>
+          {routeMapSteps.map((lvl, i) => {
+            const isCurrent = i === displayIndex
+            const isSelected = i === activeLevel
 
-            {routeLevels.map((lvl, i) => {
-              const isActive = i === activeLevel
-              const isPassed = i < activeLevel
-              const circleLabel = lvl.isElite ? "★" : lvl.level
-              const nodeTitle = lvl.isElite
-                ? "Cercle Élite"
-                : `${lvl.level} — ${lvl.subtitle}`
+            return (
+              <div key={lvl.id} className="route-step-interactive-group">
+                {/* 1. Clickable hotspot directly on the pedestal/icon with animated tactile feedback */}
+                <button
+                  type="button"
+                  className={`route-pedestal-hotspot${isCurrent ? " is-hovered" : ""}${
+                    isSelected ? " is-selected" : ""
+                  }`}
+                  style={{
+                    left: `${lvl.nodeX}%`,
+                    top: `${lvl.nodeY}%`,
+                  }}
+                  onMouseEnter={() => setHoveredLevel(i)}
+                  onMouseLeave={() => setHoveredLevel(null)}
+                  onClick={() => handleSelectLevel(i)}
+                  aria-label={`Icône ${lvl.level} : ${lvl.subtitle}`}
+                >
+                  <span className="route-pedestal-hotspot__aura" />
+                </button>
 
+                {/* 2. Permanent clean text pill badge beside the icon, identical to the ÉLITE reference */}
+                <button
+                  type="button"
+                  className={`route-level-pill${isCurrent ? " is-hovered" : ""}${
+                    isSelected ? " is-selected" : ""
+                  }${lvl.isElite ? " is-elite" : ""}`}
+                  style={{
+                    left: `${lvl.badgeX}%`,
+                    top: `${lvl.badgeY}%`,
+                  }}
+                  onMouseEnter={() => setHoveredLevel(i)}
+                  onMouseLeave={() => setHoveredLevel(null)}
+                  onClick={() => handleSelectLevel(i)}
+                  aria-label={`Niveau ${lvl.level} : ${lvl.subtitle}`}
+                >
+                  <span className="route-level-pill__num">{lvl.level}</span>
+                  <span className="route-level-pill__dot">•</span>
+                  <span className="route-level-pill__name">{lvl.subtitle}</span>
+                </button>
+              </div>
+            )
+          })}
+        </div>
+
+        {/* RIGHT LEVEL INFO PANEL */}
+        <div
+          id={`route-panel-${step.id}`}
+          role="tabpanel"
+          className="route-interactive__panel"
+        >
+          {/* Quick Level Stepper */}
+          <div className="route-panel__stepper" aria-label="Niveaux">
+            {routeMapSteps.map((lvl, i) => {
+              const isCurrent = i === displayIndex
               return (
                 <button
                   key={lvl.id}
                   type="button"
-                  role="tab"
-                  id={`route-tab-${lvl.id}`}
-                  aria-controls={`route-panel-${lvl.id}`}
-                  aria-selected={isActive}
-                  aria-label={nodeTitle}
-                  tabIndex={isActive ? 0 : -1}
                   onClick={() => handleSelectLevel(i)}
-                  onKeyDown={(e) => handleKeyDown(e, i)}
-                  className={`route-node${isActive ? " is-active" : ""}${
-                    isPassed ? " is-passed" : ""
-                  }${lvl.isElite ? " is-elite" : ""}`}
+                  onMouseEnter={() => setHoveredLevel(i)}
+                  onMouseLeave={() => setHoveredLevel(null)}
+                  className={`route-panel__step-btn${isCurrent ? " is-active" : ""}${
+                    lvl.isElite ? " is-elite" : ""
+                  }`}
+                  aria-label={`Niveau ${lvl.level} : ${lvl.subtitle}`}
                 >
-                  <span className="route-node__circle">{circleLabel}</span>
-                  <span className="route-node__label">
-                    {lvl.isElite ? "Cercle Élite" : lvl.level}
-                  </span>
-                  <span className="route-node__sub">
-                    {lvl.isElite ? "Destination" : lvl.subtitle}
-                  </span>
+                  {lvl.isElite ? "★" : lvl.level}
                 </button>
               )
             })}
           </div>
-        </div>
 
-        {/* 3. Compact Info Panel */}
-        <div
-          id={`route-panel-${step.id}`}
-          role="tabpanel"
-          aria-labelledby={`route-tab-${step.id}`}
-          className="route-card"
-        >
-          <div className="route-card__top">
-            <span className="route-card__kicker">NIVEAU SÉLECTIONNÉ</span>
-            <h3 className="route-card__title">
-              {step.isElite
-                ? "Cercle Élite"
-                : `${step.level} — ${step.subtitle}`}
+          <div className="route-panel__head">
+            <span className="route-panel__kicker">
+              NIVEAU {displayIndex + 1} / {routeMapSteps.length}
+            </span>
+            <h3 className="route-panel__title">
+              {step.isElite ? "Cercle Élite — Destination" : `${step.level} — ${step.subtitle}`}
             </h3>
-            <p className="route-card__desc">{step.description}</p>
+            <p className="route-panel__desc">{step.description}</p>
           </div>
 
-          <div className="route-card__cols">
-            <div className="route-card__col">
+          <div className="route-panel__blocks">
+            <div className="route-panel__block">
               <small>CE QUE TU VAS APPRENDRE</small>
               <p>{step.learning}</p>
             </div>
-            <div className="route-card__col">
+            <div className="route-panel__block">
               <small>OBJECTIF PÉDAGOGIQUE</small>
               <p>{step.objective}</p>
             </div>
           </div>
 
-          <div className="route-card__nav">
+          <div className="route-panel__actions">
             <button
               type="button"
-              className="route-card__btn route-card__btn--prev"
-              disabled={activeLevel === 0}
-              onClick={() => handleSelectLevel(activeLevel - 1)}
+              className="route-panel__arrow-btn"
+              disabled={displayIndex === 0}
+              onClick={() => handleSelectLevel(displayIndex - 1)}
               aria-label="Niveau précédent"
             >
-              <span aria-hidden="true">‹</span> Précédent
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m15 18-6-6 6-6" />
+              </svg>
             </button>
             <button
               type="button"
-              className="route-card__btn route-card__btn--next"
-              disabled={activeLevel === routeLevels.length - 1}
-              onClick={() => handleSelectLevel(activeLevel + 1)}
+              className="route-panel__arrow-btn"
+              disabled={displayIndex === routeMapSteps.length - 1}
+              onClick={() => handleSelectLevel(displayIndex + 1)}
               aria-label="Niveau suivant"
             >
-              Suivant <span aria-hidden="true">›</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m9 18 6-6-6-6" />
+              </svg>
             </button>
           </div>
         </div>
@@ -2282,7 +2584,7 @@ function FinalCTA({ onOpenReservation }: { onOpenReservation?: () => void }) {
     )
   }
   return (
-    <section id="attente" className="final-cta" onPointerMove={onPointerMove}>
+    <section id="attente" className="final-cta final-cta--porte" onPointerMove={onPointerMove}>
       {particles.map((particle) => (
         <span
           className="particle"
@@ -2292,28 +2594,76 @@ function FinalCTA({ onOpenReservation }: { onOpenReservation?: () => void }) {
           {particle.symbol}
         </span>
       ))}
-      <div className="cta-orbit orbit-1" />
-      <div className="cta-orbit orbit-2" />
-      <div className="shell final-cta__inner">
-        <div className="eyebrow eyebrow--light">
-          <span /> Accès anticipé
-        </div>
-        <h2>
-          Prêt à comprendre
-          <br />
-          avant d’investir ?
-        </h2>
-        <p>
-          Rejoins la liste d’attente et sois informé en priorité de l’ouverture
-          de la plateforme.
-        </p>
-        <div>
-          <ButtonLink href="#attente" onClick={onOpenReservation}>
-            Rejoindre la liste d’attente <Icon name="arrow" size={18} />
-          </ButtonLink>
-          <a href="#plateforme" className="text-link">
-            Revoir la plateforme →
-          </a>
+      <div className="final-cta__stage">
+        <img
+          src="/porte-woy.png"
+          alt="Les portes de WÔY Academy s'ouvrent"
+          className="final-cta__canvas-img"
+        />
+        <div className="final-cta__canvas-vignette" />
+
+        <div className="final-cta__wall-content">
+          <div className="final-cta__badge">
+            <span className="final-cta__badge-dot" />
+            <span>ACCÈS ANTICIPÉ · PLACES PRIORITAIRES</span>
+          </div>
+
+          <h2>
+            Prêt à comprendre
+            <br />
+            <em>avant d’investir ?</em>
+          </h2>
+
+          <p>
+            Rejoins la liste d’attente et sois informé en priorité de l’ouverture
+            de la plateforme.
+          </p>
+
+          <div className="final-cta__perks">
+            <div className="final-cta__perk">
+              <span className="final-cta__perk-icon" aria-hidden="true">
+                <Icon name="shield" size={16} />
+              </span>
+              <div className="final-cta__perk-text">
+                <strong>Accès prioritaire à l’ouverture</strong>
+                <span>Franchis les portes de l’Académie dès le lancement</span>
+              </div>
+            </div>
+
+            <div className="final-cta__perk">
+              <span className="final-cta__perk-icon" aria-hidden="true">
+                <Icon name="target" size={16} />
+              </span>
+              <div className="final-cta__perk-text">
+                <strong>Parcours complet de N0 à Cercle Élite</strong>
+                <span>Histoires interactives, simulateur &amp; arène Laamb</span>
+              </div>
+            </div>
+
+            <div className="final-cta__perk">
+              <span className="final-cta__perk-icon" aria-hidden="true">
+                <Icon name="community" size={16} />
+              </span>
+              <div className="final-cta__perk-text">
+                <strong>Communauté &amp; Rapports WÔY</strong>
+                <span>Progresse entouré d’apprenants et de mentors</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="final-cta__actions">
+            <ButtonLink href="#attente" onClick={onOpenReservation}>
+              Rejoindre la liste d’attente <Icon name="arrow" size={16} />
+            </ButtonLink>
+            <div className="final-cta__sub-row">
+              <span className="final-cta__reassurance">
+                <Icon name="check" size={14} /> Préinscription gratuite
+              </span>
+              <a href="#plateforme" className="text-link">
+                Revoir la plateforme →
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -2644,11 +2994,9 @@ export default function App() {
       <Hero onOpenReservation={() => setIsReservationOpen(true)} />
       <Platform />
       <Method />
-      <Narrative />
       <Route />
-      <Profiles />
       <Fracture />
-      <Vision />
+      <Profiles />
       <FinalCTA onOpenReservation={() => setIsReservationOpen(true)} />
       <Footer />
       <ReservationModal
