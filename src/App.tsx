@@ -413,7 +413,6 @@ function VideoModal({
         </div>
         <div className="video-modal-info">
           <div className="video-modal-copy">
-            <div className="video-modal-tag">Épisode 1 · 45 s</div>
             <h3>L'histoire d'Amadou</h3>
             <p>
               Suis Amadou dans ses premières décisions financières et apprends à
@@ -818,119 +817,126 @@ function PillarHeaderIcon({ type }: { type: PillarIconType }) {
 }
 
 function PillarParcoursPreview() {
-  const modules = [
-    {
-      title: "Comprendre la crypto",
-      status: "Terminé",
-      state: "done" as const,
-    },
-    {
-      title: "Les marchés financiers",
-      status: "En cours",
-      state: "active" as const,
-    },
-    {
-      title: "Gestion du risque",
-      status: "À découvrir",
-      state: "locked" as const,
-    },
-    {
-      title: "Stratégies d'investissement",
-      status: "À découvrir",
-      state: "locked" as const,
-    },
-  ]
-
   return (
-    <div className="pillar-preview pillar-preview--parcours">
-      <div className="pp-parcours-prog">
-        <div className="pp-parcours-prog__meta">
-          <span>PROGRESSION DU PARCOURS</span>
-          <b>35%</b>
+    <div className="pp-card-box pp-parcours-box">
+      {/* Module 1: Comprendre la crypto - Done */}
+      <div className="pp-course-item pp-course-item--done">
+        <div className="pp-course-icon pp-course-icon--green">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
         </div>
-        <div className="pp-parcours-prog__bar">
-          <span style={{ width: "35%" }} />
+        <div className="pp-course-info">
+          <span className="pp-course-title">Comprendre la crypto</span>
+          <span className="pp-course-sub">Fondamentaux</span>
         </div>
+        <span className="pp-course-badge pp-course-badge--done" aria-label="Terminé">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </span>
       </div>
-      <div className="pp-module-list">
-        {modules.map((mod) => (
-          <div
-            key={mod.title}
-            className={`pp-module-item pp-module-item--${mod.state}`}
-          >
-            <span className="pp-module-icon" aria-hidden="true">
-              {mod.state === "done" && "✓"}
-              {mod.state === "active" && "◉"}
-              {mod.state === "locked" && (
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="4" y="11" width="16" height="10" rx="2" />
-                  <path d="M8 11V7a4 4 0 0 1 8 0v4" />
-                </svg>
-              )}
-            </span>
-            <div className="pp-module-text">
-              <b>{mod.title}</b>
-              <small>{mod.status}</small>
-            </div>
-            <span className={`pp-module-badge pp-module-badge--${mod.state}`}>
-              {mod.state === "done" && "✓"}
-              {mod.state === "active" && "▶"}
-              {mod.state === "locked" && (
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="4" y="11" width="16" height="10" rx="2" />
-                  <path d="M8 11V7a4 4 0 0 1 8 0v4" />
-                </svg>
-              )}
-            </span>
-          </div>
-        ))}
+
+      {/* Module 2: Les marchés financiers - In Progress */}
+      <div className="pp-course-item pp-course-item--active">
+        <div className="pp-course-icon pp-course-icon--amber">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+        </div>
+        <div className="pp-course-info">
+          <span className="pp-course-title">Les marchés financiers</span>
+        </div>
+        <span className="pp-course-badge pp-course-badge--play" aria-label="En cours">
+          <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="6 3 20 12 6 21 6 3" />
+          </svg>
+        </span>
+      </div>
+
+      {/* Module 3: Gestion du risque - Locked */}
+      <div className="pp-course-item pp-course-item--locked">
+        <div className="pp-course-icon pp-course-icon--lock">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+          </svg>
+        </div>
+        <div className="pp-course-info">
+          <span className="pp-course-title pp-course-title--locked">Gestion du risque</span>
+        </div>
+        <span className="pp-course-lock" aria-label="Verrouillé">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+          </svg>
+        </span>
+      </div>
+
+      {/* Module 4: Stratégies d'investissement - Locked */}
+      <div className="pp-course-item pp-course-item--locked">
+        <div className="pp-course-icon pp-course-icon--lock">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+          </svg>
+        </div>
+        <div className="pp-course-info">
+          <span className="pp-course-title pp-course-title--locked">Stratégies d'investissement</span>
+        </div>
+        <span className="pp-course-lock" aria-label="Verrouillé">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+          </svg>
+        </span>
       </div>
     </div>
   )
 }
 
 function PillarPortfolioPreview() {
-  const periods = ["1J", "7J", "1M", "3M", "1A"]
+  const periods = ["1J", "1S", "1M", "3M", "1A"]
 
   return (
-    <div className="pillar-preview pillar-preview--portfolio">
-      <div className="pp-port-top">
-        <small>Solde virtuel</small>
-        <strong>1 250 000 FCFA</strong>
-        <div className="pp-port-perf">
-          <span className="pp-port-gain">+12,4 %</span>
-          <span className="pp-port-sub">Performance simulée</span>
-        </div>
+    <div className="pp-card-box pp-portfolio-box">
+      <div className="pp-port-header">
+        <span className="pp-port-label">Solde virtuel</span>
+        <strong className="pp-port-amount">1 250 000 FCFA</strong>
+        <span className="pp-port-change">+12,4 % (+130 000)</span>
       </div>
 
-      <div className="pp-port-chart">
-        <svg viewBox="0 0 260 76" preserveAspectRatio="none" aria-hidden="true">
+      <div className="pp-port-chart-container">
+        <svg viewBox="0 0 260 76" preserveAspectRatio="none" aria-hidden="true" className="pp-port-svg">
           <defs>
-            <linearGradient id="ppTealGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#14b8a6" stopOpacity="0.34" />
-              <stop offset="100%" stopColor="#14b8a6" stopOpacity="0.0" />
+            <linearGradient id="ppTealGradNew" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#10b981" stopOpacity="0.32" />
+              <stop offset="100%" stopColor="#10b981" stopOpacity="0.0" />
             </linearGradient>
           </defs>
           <path
             d="M0 64 C24 61 36 52 56 54 S88 40 112 43 S146 28 172 31 S212 16 260 7 V76 H0 Z"
-            fill="url(#ppTealGrad)"
+            fill="url(#ppTealGradNew)"
           />
           <path
             d="M0 64 C24 61 36 52 56 54 S88 40 112 43 S146 28 172 31 S212 16 260 7"
             fill="none"
-            stroke="#2dd4bf"
-            strokeWidth="2"
+            stroke="#10b981"
+            strokeWidth="2.2"
             strokeLinecap="round"
           />
-          <circle cx="258" cy="7" r="3" fill="#2dd4bf" />
         </svg>
       </div>
 
-      <div className="pp-port-periods" role="group" aria-label="Filtres de période">
+      <div className="pp-port-period-pills">
         {periods.map((p) => (
           <span
             key={p}
-            className={`pp-port-period ${p === "1M" ? "is-active" : ""}`}
+            className={`pp-period-pill ${p === "1M" ? "is-active" : ""}`}
           >
             {p}
           </span>
@@ -941,109 +947,102 @@ function PillarPortfolioPreview() {
 }
 
 function PillarReportPreview() {
+  const barHeights = [28, 42, 56, 72, 85, 100]
   const items = [
-    { label: "Analyse des marchés", color: "blue" },
-    { label: "Tendances à surveiller", color: "teal" },
-    { label: "Risques et opportunités", color: "emerald" },
-    { label: "Synthèse du mois", color: "gold" },
+    { label: "Analyse des marchés", color: "#3b82f6" },
+    { label: "Performance du portefeuille", color: "#06b6d4" },
+    { label: "Opportunités à surveiller", color: "#10b981" },
+    { label: "Leçons du mois", color: "#f59e0b" },
   ]
-  const barHeights = [34, 46, 58, 72, 84, 100]
 
   return (
-    <div className="pillar-preview pillar-preview--report">
-      <div className="pp-report-doc">
-        <div className="pp-report-head">
-          <div>
-            <strong>Rapport mensuel</strong>
-            <small>Analyse des marchés</small>
-          </div>
-          <span className="pp-report-tag">PDF</span>
-        </div>
-
-        <div className="pp-report-bars" aria-hidden="true">
-          {barHeights.map((h, i) => (
-            <span key={i} style={{ height: `${h}%` }} />
-          ))}
-        </div>
-
-        <ul className="pp-report-list">
-          {items.map((item) => (
-            <li key={item.label}>
-              <i className={`pp-report-dot pp-report-dot--${item.color}`} aria-hidden="true">
-                ✓
-              </i>
-              <span>{item.label}</span>
-            </li>
-          ))}
-        </ul>
+    <div className="pp-card-box pp-report-white-box">
+      <div className="pp-report-head-new">
+        <strong className="pp-report-title">Rapport mensuel</strong>
+        <span className="pp-report-date">Septembre 2024</span>
       </div>
+
+      <div className="pp-report-chart-bars" aria-hidden="true">
+        {barHeights.map((h, i) => (
+          <div key={i} className="pp-report-bar-wrap">
+            <span
+              className="pp-report-bar"
+              style={{ height: `${h}%` }}
+            />
+          </div>
+        ))}
+      </div>
+
+      <ul className="pp-report-items-list">
+        {items.map((item) => (
+          <li key={item.label} className="pp-report-item">
+            <span
+              className="pp-report-check-dot"
+              style={{ backgroundColor: item.color }}
+              aria-hidden="true"
+            >
+              <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </span>
+            <span className="pp-report-label">{item.label}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }
 
 function PillarLaambPreview() {
-  const metrics = [
-    { label: "Analyse", val: "88%" },
-    { label: "Risque", val: "Maîtrisé" },
-    { label: "Performance", val: "+8,6%" },
+  const rankings = [
+    { rank: "crown", name: "K. Diop", pts: "1 820 pts", isUser: false },
+    { rank: "2", name: "A. Traoré", pts: "1 640 pts", isUser: false },
+    { rank: "3", name: "M. Kane", pts: "1 520 pts", isUser: false },
+    { rank: "4", name: "Toi", pts: "1 420 pts", isUser: true },
   ]
 
   return (
-    <div className="pillar-preview pillar-preview--laamb">
-      <div className="pp-laamb-head">
-        <div>
-          <strong>LAAMB</strong>
-          <small>L'Arène des Traders</small>
+    <div className="pp-card-box pp-arena-box">
+      <div className="pp-arena-top">
+        <div className="pp-arena-score-block">
+          <span className="pp-arena-score-label">WÓY Score</span>
+          <strong className="pp-arena-score-val">1 420 pts</strong>
         </div>
-        <span className="pp-laamb-badge">Trading simulé</span>
+        <span className="pp-arena-top-badge">Top 12%</span>
       </div>
 
-      <div className="pp-laamb-duel">
-        <div className="pp-laamb-player">
-          <span className="pp-laamb-avatar pp-laamb-avatar--gold">A</span>
-          <b>Amadou</b>
-        </div>
-        <span className="pp-laamb-vs">VS</span>
-        <div className="pp-laamb-player pp-laamb-player--right">
-          <b>Challenger</b>
-          <span className="pp-laamb-avatar pp-laamb-avatar--dark">C</span>
-        </div>
+      <div className="pp-arena-tabs">
+        <span className="pp-arena-tab is-active">Classement</span>
+        <span className="pp-arena-tab">Défis</span>
       </div>
 
-      <div className="pp-laamb-chart" aria-hidden="true">
-        <svg viewBox="0 0 240 46" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="ppLaambGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#d7ad63" stopOpacity="0.28" />
-              <stop offset="100%" stopColor="#d7ad63" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          <path
-            d="M0 38 C30 35 48 26 78 28 S122 16 155 20 S198 9 240 5 V46 H0 Z"
-            fill="url(#ppLaambGrad)"
-          />
-          <path
-            d="M0 38 C30 35 48 26 78 28 S122 16 155 20 S198 9 240 5"
-            fill="none"
-            stroke="#e5b869"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-          />
-          <path
-            d="M0 40 C34 39 58 33 88 35 S132 30 165 32 S204 25 240 22"
-            fill="none"
-            stroke="#64748b"
-            strokeWidth="1.3"
-            strokeDasharray="3 3"
-          />
-        </svg>
-      </div>
+      <div className="pp-arena-list">
+        {rankings.map((r) => (
+          <div
+            key={r.name}
+            className={`pp-arena-row ${r.isUser ? "is-user" : ""}`}
+          >
+            <div className="pp-arena-rank">
+              {r.rank === "crown" ? (
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b" aria-label="Premier">
+                  <path d="M2 19h20v2H2v-2zm1.5-4.5L5 6l4.5 4.5L12 4l2.5 6.5L19 6l1.5 8.5H3.5z" />
+                </svg>
+              ) : (
+                <span className="pp-rank-num">{r.rank}</span>
+              )}
+            </div>
 
-      <div className="pp-laamb-metrics">
-        {metrics.map((m) => (
-          <div className="pp-laamb-metric" key={m.label}>
-            <small>{m.label}</small>
-            <b>{m.val}</b>
+            <div className={`pp-arena-avatar ${r.isUser ? "is-user-avatar" : ""}`}>
+              <span>{r.name.charAt(0)}</span>
+            </div>
+
+            <span className={`pp-arena-name ${r.isUser ? "is-user-name" : ""}`}>
+              {r.name}
+            </span>
+
+            <span className={`pp-arena-pts ${r.isUser ? "is-user-pts" : ""}`}>
+              {r.pts}
+            </span>
           </div>
         ))}
       </div>
@@ -1051,228 +1050,68 @@ function PillarLaambPreview() {
   )
 }
 
-const pillars = [
+const platformPillars = [
   {
-    number: "01",
-    tag: "APPRENDRE",
     icon: "book-open" as PillarIconType,
     title: "Parcours pédagogique",
-    shortTitle: "Parcours",
     description: "Des cours progressifs, concrets et adaptés à ton niveau.",
-    highlights: [
-      "Modules interactifs structurés du débutant à l'avancé",
-      "Quiz de validation après chaque leçon",
-      "Suivi de progression clair et visuel",
-    ],
     ui: <PillarParcoursPreview />,
   },
   {
-    number: "02",
-    tag: "S'ENTRAÎNER",
     icon: "chart-up" as PillarIconType,
     title: "Portefeuille simulé",
-    shortTitle: "Portefeuille",
-    description:
-      "Entraîne-toi sans risque financier réel avec des conditions de marché simulées.",
-    highlights: [
-      "1 250 000 FCFA de capital virtuel pour tester tes idées",
-      "Données et variations réalistes en temps réel",
-      "Diversification et analyse de rentabilité sans stress",
-    ],
+    description: "Entraine-toi sans risque avec des conditions réelles de marché.",
     ui: <PillarPortfolioPreview />,
   },
   {
-    number: "03",
-    tag: "ANALYSER",
     icon: "doc-analysis" as PillarIconType,
     title: "Rapports mensuels",
-    shortTitle: "Rapports",
-    description:
-      "Des analyses claires pour comprendre les tendances et les risques des marchés.",
-    highlights: [
-      "Décryptages macro & crypto sans jargon inutile",
-      "Identification des tendances clés et pièges à éviter",
-      "Synthèses mensuelles téléchargeables en PDF",
-    ],
+    description: "Des analyses claires pour comprendre les tendances et progresser.",
     ui: <PillarReportPreview />,
   },
   {
-    number: "04",
-    tag: "CONFRONTER",
     icon: "trophy" as PillarIconType,
-    title: "Arène des Traders",
-    shortTitle: "Arène LAAMB",
-    description:
-      "Défie d'autres traders et confronte tes stratégies dans une compétition simulée.",
-    highlights: [
-      "Duels en direct sous tension de marché",
-      "Gagne des points de prestige et monte au classement",
-      "Compare tes prises de décision avec la communauté",
-    ],
+    title: "Arène des traders",
+    description: "Participe à des défis, compare tes décisions et progresse avec la communauté.",
     ui: <PillarLaambPreview />,
   },
 ]
 
 function Platform() {
-  const [current, setCurrent] = useState(0)
-  const [isPaused, setIsPaused] = useState(false)
-  const total = pillars.length
-  const touchStartX = useRef<number | null>(null)
-  const touchEndX = useRef<number | null>(null)
-
-  const goTo = (index: number) => {
-    const next = (index + total) % total
-    setCurrent(next)
-  }
-
-  // 2-second automatic sliding, paused on hover and touch
-  useEffect(() => {
-    if (isPaused) return
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % total)
-    }, 2000)
-    return () => clearInterval(timer)
-  }, [isPaused, total])
-
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      const activeEl = document.activeElement
-      if (activeEl && (activeEl.tagName === "INPUT" || activeEl.tagName === "TEXTAREA")) return
-      if (e.key === "ArrowLeft") goTo(current - 1)
-      if (e.key === "ArrowRight") goTo(current + 1)
-    }
-    window.addEventListener("keydown", handleKeyDown)
-    return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [current, total])
-
-  // Touch gesture handlers
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setIsPaused(true)
-    touchStartX.current = e.touches[0].clientX
-    touchEndX.current = e.touches[0].clientX
-  }
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    touchEndX.current = e.touches[0].clientX
-  }
-
-  const handleTouchEnd = () => {
-    setIsPaused(false)
-    if (touchStartX.current !== null && touchEndX.current !== null) {
-      const diff = touchStartX.current - touchEndX.current
-      if (Math.abs(diff) > 40) {
-        if (diff > 0) {
-          goTo(current + 1)
-        } else {
-          goTo(current - 1)
-        }
-      }
-    }
-    touchStartX.current = null
-    touchEndX.current = null
-  }
-
   return (
-    <section id="plateforme" className="platform-fullscreen">
+    <section id="plateforme" className="platform-clean-section">
       {/* Background ambient lighting */}
-      <div className="platform-fs__ambient-glow" aria-hidden="true" />
+      <div className="platform-clean__ambient-glow" aria-hidden="true" />
 
       {/* Section Header */}
-      <div className="platform-fs__head shell">
-        <span className="platform-fs__badge">ÉCOSYSTÈME COMPLET</span>
+      <div className="platform-clean__head shell">
         <h2>
           Une plateforme, <em>quatre piliers.</em>
         </h2>
         <p>
-          Un parcours complet pour apprendre la finance, s'entraîner sur les
-          marchés, comprendre les analyses et relever des défis de trading.
+          Une méthode complète pour passer de la compréhension à l'action, en toute autonomie.
         </p>
       </div>
 
-      {/* Fullscreen Slider Stage with 2-second hover pause */}
-      <div
-        className="platform-fs__stage"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-      >
-        <div className="platform-fs__track-wrapper">
-          <div
-            className="platform-fs__track"
-            style={{ transform: `translateX(-${current * 100}%)` }}
-          >
-            {pillars.map((pillar, i) => {
-              const isActive = i === current
-              return (
-                <div
-                  className={`platform-fs__slide${isActive ? " is-active" : ""}`}
-                  key={pillar.title}
-                  aria-hidden={!isActive}
-                >
-                  <article className="pillar-card pillar-card--fullscreen">
-                    {/* Top / Left meta column */}
-                    <div className="pillar-card__info">
-                      <div className="pillar-card__tag-row">
-                        <span className="pillar-card__tag">PILIER {pillar.number} · {pillar.tag}</span>
-                      </div>
+      {/* 4 Cards Container */}
+      <div className="platform-clean__container">
+        <div className="platform-clean__grid">
+          {platformPillars.map((pillar) => (
+            <article key={pillar.title} className="pillar-clean-card">
+              <div className="pillar-clean-card__top">
+                <span className="pillar-clean-card__icon" aria-hidden="true">
+                  <PillarHeaderIcon type={pillar.icon} />
+                </span>
+                <h3>{pillar.title}</h3>
+                <p>{pillar.description}</p>
+              </div>
 
-                      <div className="pillar-card__title-row">
-                        <span className="pillar-card__icon" aria-hidden="true">
-                          <PillarHeaderIcon type={pillar.icon} />
-                        </span>
-                        <h3>{pillar.title}</h3>
-                      </div>
-
-                      <p className="pillar-card__desc">{pillar.description}</p>
-
-                      <ul className="pillar-card__highlights">
-                        {pillar.highlights.map((h, hIdx) => (
-                          <li key={hIdx}>
-                            <span className="pillar-card__hl-check" aria-hidden="true">✓</span>
-                            <span>{h}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Preview UI column */}
-                    <div className="pillar-card__preview-col">
-                      <div className="pillar-card__preview-box">
-                        {pillar.ui}
-                      </div>
-                    </div>
-                  </article>
-                </div>
-              )
-            })}
-          </div>
+              <div className="pillar-clean-card__preview">
+                {pillar.ui}
+              </div>
+            </article>
+          ))}
         </div>
-
-        {/* Side Navigation Arrows (Desktop & Mobile) */}
-        <button
-          className="platform-fs__arrow platform-fs__arrow--side platform-fs__arrow--prev"
-          onClick={() => goTo(current - 1)}
-          aria-label="Pilier précédent"
-          type="button"
-        >
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-            <path d="m15 18-6-6 6-6" />
-          </svg>
-        </button>
-
-        <button
-          className="platform-fs__arrow platform-fs__arrow--side platform-fs__arrow--next"
-          onClick={() => goTo(current + 1)}
-          aria-label="Pilier suivant"
-          type="button"
-        >
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-            <path d="m9 18 6-6-6-6" />
-          </svg>
-        </button>
       </div>
     </section>
   )

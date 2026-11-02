@@ -19,3 +19,11 @@ logs/
 # beside it.
 /.plugins/
 /.opencode-skills/
+
+# Temp upload and test folders
+UPLOAD_GITHUB/
+GITHUB_UPLOAD_FINAL/
+mobile N0.2/
+public/test-*.jpg
+*.tmp
+

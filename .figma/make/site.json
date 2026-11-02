@@ -1,9 +1,10 @@
-
 {
-  "title": "WOY Academy",
-  "description": "Plateforme WOY Academy",
-  "language": "fr",
+  "description": "WÔY Academy is an educational platform that empowers users to understand finance, crypto, and investment through interactive courses and simulations.",
   "robots": {
-    "index": true
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
   }
 }

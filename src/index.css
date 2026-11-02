@@ -6484,3 +6484,667 @@ img { display: block; max-width: 100%; }
     font-size: 6.5px;
   }
 }
+
+
+/* ==========================================================================
+   PLATEFORME 4 PILIERS - VERSION CLEAN & MOBILE HORIZONTALE
+   ========================================================================== */
+
+.platform-clean-section {
+  position: relative;
+  padding: 86px 0 96px;
+  background: linear-gradient(180deg, #0b0c0e 0%, #0e100f 50%, #0b0c0e 100%);
+  color: var(--white);
+  border-top: 1px solid rgba(215, 173, 99, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.platform-clean__ambient-glow {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1000px;
+  height: 540px;
+  background: radial-gradient(circle, rgba(215, 173, 99, 0.08) 0%, rgba(14, 16, 15, 0) 72%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.platform-clean__head {
+  position: relative;
+  z-index: 2;
+  max-width: 780px;
+  margin: 0 auto 38px;
+  text-align: center;
+  padding: 0 16px;
+}
+
+.platform-clean__head h2 {
+  margin: 0 0 12px;
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.3vw, 44px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+}
+
+.platform-clean__head h2 em {
+  font-style: normal;
+  color: #e5b869;
+}
+
+.platform-clean__head p {
+  margin: 0 auto;
+  max-width: 660px;
+  font-size: clamp(14px, 1.1vw, 16px);
+  line-height: 1.55;
+  color: #cbd5e1;
+  font-weight: 450;
+}
+
+/* Container & Grid */
+.platform-clean__container {
+  position: relative;
+  z-index: 2;
+  width: min(100% - 36px, 1340px);
+  margin: 0 auto;
+}
+
+.platform-clean__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+/* Individual Card */
+.pillar-clean-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+  height: 100%;
+  padding: 22px 18px 20px;
+  border-radius: 18px;
+  background:
+    radial-gradient(115% 78% at 22% 0%, rgba(206, 156, 68, 0.22) 0%, rgba(150, 108, 38, 0.09) 44%, rgba(14, 16, 15, 0) 76%),
+    linear-gradient(180deg, #16130e 0%, #111311 50%, #0d0f0e 100%);
+  border: 1px solid rgba(212, 168, 86, 0.35);
+  border-top: 1px solid rgba(230, 186, 102, 0.6);
+  box-shadow:
+    0 16px 36px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 226, 168, 0.14);
+  transition: transform 250ms ease, border-color 250ms ease, box-shadow 250ms ease;
+  overflow: hidden;
+}
+
+.pillar-clean-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(230, 186, 102, 0.65);
+  box-shadow:
+    0 22px 46px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(255, 232, 180, 0.25);
+}
+
+.pillar-clean-card__top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.pillar-clean-card__icon {
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #f3c66f;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 0 14px rgba(240, 185, 75, 0.55));
+}
+
+.pillar-clean-card h3 {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #f0c36d;
+  min-height: 48px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.pillar-clean-card__top p {
+  margin: 0;
+  color: #cbd5e1;
+  font-size: 13.5px;
+  line-height: 1.45;
+  font-weight: 400;
+  min-height: 58px;
+}
+
+.pillar-clean-card__preview {
+  width: 100%;
+  height: 236px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Shared Preview Box */
+.pp-card-box {
+  width: 100%;
+  height: 100%;
+  border-radius: 13px;
+  overflow: hidden;
+}
+
+/* --- CARD 01: Parcours Pédagogique --- */
+.pp-parcours-box {
+  background: #090e12;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.pp-course-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 9px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.pp-course-item--done {
+  background: rgba(16, 185, 129, 0.14);
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+.pp-course-item--active {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.pp-course-item--locked {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.pp-course-icon {
+  width: 25px;
+  height: 25px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pp-course-icon--green {
+  background: rgba(16, 185, 129, 0.22);
+  color: #34d399;
+}
+
+.pp-course-icon--amber {
+  background: rgba(245, 158, 11, 0.22);
+  color: #fbbf24;
+}
+
+.pp-course-icon--lock {
+  background: rgba(255, 255, 255, 0.05);
+  color: #64748b;
+}
+
+.pp-course-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.pp-course-title {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #f8fafc;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pp-course-title--locked {
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.pp-course-sub {
+  font-size: 9.5px;
+  color: #34d399;
+  line-height: 1.2;
+  margin-top: 1px;
+}
+
+.pp-course-badge {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pp-course-badge--done {
+  background: #10b981;
+  color: #062319;
+}
+
+.pp-course-badge--play {
+  background: #e5b869;
+  color: #16120a;
+}
+
+.pp-course-lock {
+  color: #64748b;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* --- CARD 02: Portefeuille Simulé --- */
+.pp-portfolio-box {
+  background:
+    radial-gradient(90% 70% at 80% 70%, rgba(20, 184, 166, 0.16) 0%, transparent 70%),
+    linear-gradient(180deg, #0b1417 0%, #070e10 100%);
+  border: 1px solid rgba(20, 184, 166, 0.28);
+  padding: 12px 12px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pp-port-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.pp-port-label {
+  font-size: 10px;
+  color: #94a3b8;
+  margin-bottom: 2px;
+}
+
+.pp-port-amount {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.pp-port-change {
+  font-family: var(--font-display);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #2dd4bf;
+  margin-top: 2px;
+}
+
+.pp-port-chart-container {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  margin: 6px 0 8px;
+  min-height: 60px;
+}
+
+.pp-port-svg {
+  width: 100%;
+  height: 62px;
+  display: block;
+}
+
+.pp-port-period-pills {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+}
+
+.pp-period-pill {
+  text-align: center;
+  padding: 4px 0;
+  border-radius: 6px;
+  font-family: var(--font-display);
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.pp-period-pill.is-active {
+  background: #00d2b4;
+  color: #032b24;
+  border-color: #2dd4bf;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.35);
+}
+
+/* --- CARD 03: Rapports Mensuels --- */
+.pp-report-white-box {
+  background: #ffffff;
+  color: #0f172a;
+  border-radius: 13px;
+  padding: 12px 13px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.32);
+}
+
+.pp-report-head-new {
+  display: flex;
+  flex-direction: column;
+}
+
+.pp-report-title {
+  font-family: var(--font-display);
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.15;
+}
+
+.pp-report-date {
+  font-size: 10px;
+  color: #64748b;
+  margin-top: 1px;
+}
+
+.pp-report-chart-bars {
+  height: 44px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  align-items: end;
+  gap: 6px;
+  padding: 4px 4px 0;
+  border-bottom: 1px solid #e2e8f0;
+  margin: 6px 0;
+}
+
+.pp-report-bar-wrap {
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.pp-report-bar {
+  display: block;
+  width: 100%;
+  border-radius: 3px 3px 0 0;
+  background: linear-gradient(180deg, #60a5fa 0%, #3b82f6 100%);
+}
+
+.pp-report-items-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.pp-report-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1.2;
+}
+
+.pp-report-check-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pp-report-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- CARD 04: Arène des Traders --- */
+.pp-arena-box {
+  background: #090e12;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 11px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pp-arena-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.pp-arena-score-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.pp-arena-score-label {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #e5b869;
+}
+
+.pp-arena-score-val {
+  font-family: var(--font-display);
+  font-size: 16.5px;
+  font-weight: 800;
+  color: #f3c66f;
+  line-height: 1.15;
+}
+
+.pp-arena-top-badge {
+  padding: 2px 7px;
+  border-radius: 999px;
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #e5b869;
+  background: rgba(229, 184, 105, 0.12);
+  border: 1px solid rgba(229, 184, 105, 0.4);
+}
+
+.pp-arena-tabs {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 3px;
+  margin: 4px 0 6px;
+}
+
+.pp-arena-tab {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #64748b;
+  padding-bottom: 3px;
+  position: relative;
+}
+
+.pp-arena-tab.is-active {
+  color: #f8fafc;
+  font-weight: 700;
+}
+
+.pp-arena-tab.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 2px;
+  background: #e5b869;
+  border-radius: 2px;
+}
+
+.pp-arena-list {
+  display: grid;
+  gap: 5px;
+}
+
+.pp-arena-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 3.5px 6px;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.02);
+  font-size: 10.5px;
+}
+
+.pp-arena-row.is-user {
+  background: rgba(229, 184, 105, 0.09);
+  border: 1px solid rgba(229, 184, 105, 0.28);
+}
+
+.pp-arena-rank {
+  width: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pp-rank-num {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.pp-arena-avatar {
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: #1e293b;
+  color: #cbd5e1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.pp-arena-avatar.is-user-avatar {
+  background: linear-gradient(135deg, #e5b869, #b58536);
+  color: #141008;
+  font-weight: 800;
+}
+
+.pp-arena-name {
+  color: #cbd5e1;
+  font-weight: 600;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pp-arena-name.is-user-name {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.pp-arena-pts {
+  color: #94a3b8;
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.pp-arena-pts.is-user-pts {
+  color: #f3c66f;
+  font-weight: 800;
+}
+
+/* ==========================================================================
+   MOBILE & TABLETTE : LES 4 CARTES DOIVENT RESTER SUR LA MÊME LIGNE
+   ========================================================================== */
+
+@media (max-width: 1099px) {
+  .platform-clean-section {
+    padding: 60px 0 70px;
+  }
+
+  .platform-clean__head {
+    margin-bottom: 24px;
+  }
+
+  .platform-clean__container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 16px 20px !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-snap-type: x mandatory !important;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(229, 184, 105, 0.45) rgba(255, 255, 255, 0.05);
+  }
+
+  .platform-clean__container::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .platform-clean__container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 999px;
+  }
+
+  .platform-clean__container::-webkit-scrollbar-thumb {
+    background: rgba(229, 184, 105, 0.45);
+    border-radius: 999px;
+  }
+
+  /* Sur mobile : alignement horizontal STRICT (sur la même ligne) */
+  .platform-clean__grid {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 14px !important;
+    width: max-content !important;
+    min-width: 100% !important;
+    align-items: stretch !important;
+  }
+
+  .pillar-clean-card {
+    flex: 0 0 285px !important;
+    width: 285px !important;
+    max-width: 84vw !important;
+    scroll-snap-align: start !important;
+  }
+}
