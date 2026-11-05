@@ -131,7 +131,7 @@ function Logo({ light = false }: { light?: boolean }) {
   return (
     <div className="logo-brand" aria-label="WÔY Academy">
       <img
-        src="/logo-header-footer.gif"
+        src="/logo-woy-header.png"
         alt="WÔY Academy"
         className="logo-brand__img"
       />
