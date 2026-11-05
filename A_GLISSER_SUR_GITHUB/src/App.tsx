@@ -2636,74 +2636,238 @@ function FinalCTA({ onOpenReservation }: { onOpenReservation?: () => void }) {
           {particle.symbol}
         </span>
       ))}
-      <div className="final-cta__stage">
-        <img
-          src="/porte-woy.png"
-          alt="Les portes de WÔY Academy s'ouvrent"
-          className="final-cta__canvas-img"
-        />
-        <div className="final-cta__canvas-vignette" />
 
-        <div className="final-cta__wall-content">
-          <div className="final-cta__badge">
-            <span className="final-cta__badge-dot" />
-            <span>ACCÈS ANTICIPÉ · PLACES PRIORITAIRES</span>
+      {/* ========================================================
+          1. DESKTOP VIEW ONLY (>= 1024px)
+          Strictly identical to existing desktop code
+          ======================================================== */}
+      <div className="final-cta-desktop-only">
+        <div className="final-cta__stage">
+          <img
+            src="/porte-woy.png"
+            alt="Les portes de WÔY Academy s'ouvrent"
+            className="final-cta__canvas-img"
+          />
+          <div className="final-cta__canvas-vignette" />
+
+          <div className="final-cta__wall-content">
+            <div className="final-cta__badge">
+              <span className="final-cta__badge-dot" />
+              <span>ACCÈS ANTICIPÉ · PLACES PRIORITAIRES</span>
+            </div>
+
+            <h2>
+              Prêt à comprendre
+              <br />
+              <em>avant d’investir ?</em>
+            </h2>
+
+            <p>
+              Rejoins la liste d’attente et sois informé en priorité de l’ouverture
+              de la plateforme.
+            </p>
+
+            <div className="final-cta__perks">
+              <div className="final-cta__perk">
+                <span className="final-cta__perk-icon" aria-hidden="true">
+                  <Icon name="shield" size={16} />
+                </span>
+                <div className="final-cta__perk-text">
+                  <strong>Accès prioritaire à l’ouverture</strong>
+                  <span>Franchis les portes de l’Académie dès le lancement</span>
+                </div>
+              </div>
+
+              <div className="final-cta__perk">
+                <span className="final-cta__perk-icon" aria-hidden="true">
+                  <Icon name="target" size={16} />
+                </span>
+                <div className="final-cta__perk-text">
+                  <strong>Parcours complet de N0 à Cercle Élite</strong>
+                  <span>Histoires interactives, simulateur &amp; arène Laamb</span>
+                </div>
+              </div>
+
+              <div className="final-cta__perk">
+                <span className="final-cta__perk-icon" aria-hidden="true">
+                  <Icon name="community" size={16} />
+                </span>
+                <div className="final-cta__perk-text">
+                  <strong>Communauté &amp; Rapports WÔY</strong>
+                  <span>Progresse entouré d’apprenants et de mentors</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="final-cta__actions">
+              <ButtonLink href="#attente" onClick={onOpenReservation}>
+                Rejoindre la liste d’attente <Icon name="arrow" size={16} />
+              </ButtonLink>
+              <div className="final-cta__sub-row">
+                <span className="final-cta__reassurance">
+                  <Icon name="check" size={14} /> Préinscription gratuite
+                </span>
+                <a href="#plateforme" className="text-link">
+                  Revoir la plateforme →
+                </a>
+              </div>
+            </div>
           </div>
+        </div>
+      </div>
 
-          <h2>
-            Prêt à comprendre
-            <br />
-            <em>avant d’investir ?</em>
-          </h2>
+      {/* ========================================================
+          2. MOBILE VIEW ONLY (< 1024px)
+          Breathtaking 9:16 Vertical Experience with PORTE MOBILE
+          ======================================================== */}
+      <div className="final-cta-mobile-only">
+        <div className="final-cta-mobile__stage">
+          <img
+            src="/porte-mobile.png"
+            alt="La porte est ouverte — WÔY Academy"
+            className="final-cta-mobile__bg-img"
+          />
 
-          <p>
-            Rejoins la liste d’attente et sois informé en priorité de l’ouverture
-            de la plateforme.
-          </p>
+          <div className="final-cta-mobile__overlay" />
 
-          <div className="final-cta__perks">
-            <div className="final-cta__perk">
-              <span className="final-cta__perk-icon" aria-hidden="true">
-                <Icon name="shield" size={16} />
+          <div className="final-cta-mobile__content">
+            {/* Top Badge */}
+            <div className="final-cta-mobile__kicker">
+              LA PORTE EST OUVERTE.
+            </div>
+
+            {/* Main Headline */}
+            <h2 className="final-cta-mobile__title">
+              À TOI D’<span>ENTRER</span><br />
+              AVEC MÉTHODE.
+            </h2>
+
+            {/* Subtitle */}
+            <p className="final-cta-mobile__lead">
+              <strong>Rejoins la Liste d’attente WÔY</strong>
+              <span>et prépare-toi à comprendre, décider et progresser avec clarté.</span>
+            </p>
+
+            {/* Big CTA Button */}
+            <button
+              type="button"
+              className="final-cta-mobile__btn"
+              onClick={onOpenReservation}
+            >
+              <span>REJOINDRE LA LISTE D’ATTENTE</span>
+              <span className="final-cta-mobile__btn-circle">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
               </span>
-              <div className="final-cta__perk-text">
-                <strong>Accès prioritaire à l’ouverture</strong>
-                <span>Franchis les portes de l’Académie dès le lancement</span>
+            </button>
+
+            {/* 3 Perks Row */}
+            <div className="final-cta-mobile__perks">
+              <div className="final-cta-mobile__perk">
+                <div className="final-cta-mobile__perk-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+                  </svg>
+                </div>
+                <strong>Comprends.</strong>
+                <span>Découvre ce qui compte vraiment.</span>
+              </div>
+
+              <div className="final-cta-mobile__perk">
+                <div className="final-cta-mobile__perk-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 3v18" />
+                    <path d="M6 7l6-3 6 3" />
+                    <path d="M6 7l-3 7h6l-3-7z" />
+                    <path d="M18 7l-3 7h6l-3-7z" />
+                  </svg>
+                </div>
+                <strong>Décide.</strong>
+                <span>Prends des décisions éclairées, alignées et stratégiques.</span>
+              </div>
+
+              <div className="final-cta-mobile__perk">
+                <div className="final-cta-mobile__perk-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                    <polyline points="17 6 23 6 23 12" />
+                  </svg>
+                </div>
+                <strong>Progresse.</strong>
+                <span>Avance avec méthode. Impacte ton monde.</span>
               </div>
             </div>
 
-            <div className="final-cta__perk">
-              <span className="final-cta__perk-icon" aria-hidden="true">
-                <Icon name="target" size={16} />
-              </span>
-              <div className="final-cta__perk-text">
-                <strong>Parcours complet de N0 à Cercle Élite</strong>
-                <span>Histoires interactives, simulateur &amp; arène Laamb</span>
+            {/* Social Links Row */}
+            <div className="final-cta-mobile__socials-wrap">
+              <div className="final-cta-mobile__socials">
+                <a
+                  href="https://www.linkedin.com/company/woy-academy/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="final-cta-mobile__social-btn"
+                  aria-label="LinkedIn WÔY"
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28m1.39 9.74v-8.37H5.07v8.37h2.78z" />
+                  </svg>
+                </a>
+                <a
+                  href="https://x.com/woy_academy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="final-cta-mobile__social-btn"
+                  aria-label="X Twitter WÔY"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
+                </a>
+                <a
+                  href="https://www.instagram.com/woy_academy/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="final-cta-mobile__social-btn"
+                  aria-label="Instagram WÔY"
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                  </svg>
+                </a>
+                <a
+                  href="https://www.youtube.com/@WoyACADEMY"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="final-cta-mobile__social-btn"
+                  aria-label="YouTube WÔY"
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                  </svg>
+                </a>
+                <a
+                  href="https://www.facebook.com/profile.php?id=61594635882825"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="final-cta-mobile__social-btn"
+                  aria-label="Facebook WÔY"
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                  </svg>
+                </a>
               </div>
             </div>
 
-            <div className="final-cta__perk">
-              <span className="final-cta__perk-icon" aria-hidden="true">
-                <Icon name="community" size={16} />
-              </span>
-              <div className="final-cta__perk-text">
-                <strong>Communauté &amp; Rapports WÔY</strong>
-                <span>Progresse entouré d’apprenants et de mentors</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="final-cta__actions">
-            <ButtonLink href="#attente" onClick={onOpenReservation}>
-              Rejoindre la liste d’attente <Icon name="arrow" size={16} />
-            </ButtonLink>
-            <div className="final-cta__sub-row">
-              <span className="final-cta__reassurance">
-                <Icon name="check" size={14} /> Préinscription gratuite
-              </span>
-              <a href="#plateforme" className="text-link">
-                Revoir la plateforme →
-              </a>
+            {/* Bottom Disclaimer */}
+            <div className="final-cta-mobile__bottom">
+              <span className="final-cta-mobile__bottom-sub">PAS DE PROMESSE DE GAIN.</span>
+              <strong className="final-cta-mobile__bottom-main">UNE MÉTHODE POUR COMPRENDRE, DÉCIDER ET PROGRESSER.</strong>
             </div>
           </div>
         </div>
