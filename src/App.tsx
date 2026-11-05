@@ -1697,6 +1697,10 @@ interface RouteStep {
   nodeY: number
   badgeX: number
   badgeY: number
+  mNodeX?: number
+  mNodeY?: number
+  mBadgeX?: number
+  mBadgeY?: number
   description: string
   learning: string
   objective: string
@@ -1712,6 +1716,10 @@ const routeMapSteps: RouteStep[] = [
     nodeY: 89.0,
     badgeX: 61.0,
     badgeY: 89.0,
+    mNodeX: 50.0,
+    mNodeY: 72.9,
+    mBadgeX: 21.0,
+    mBadgeY: 72.9,
     description: "Comprendre les bases de l’argent, du risque et de la prise de décision financière.",
     learning: "Le rôle de la monnaie, l'épargne, l'inflation et les premiers pièges à éviter.",
     objective: "Poser des bases saines et lucides avant d'engager le moindre franc.",
@@ -1724,6 +1732,10 @@ const routeMapSteps: RouteStep[] = [
     nodeY: 72.0,
     badgeX: 37.0,
     badgeY: 72.0,
+    mNodeX: 53.2,
+    mNodeY: 63.0,
+    mBadgeX: 21.0,
+    mBadgeY: 63.0,
     description: "Identifier les arnaques, protéger son capital et adopter les bons réflexes de sécurité.",
     learning: "Sécurisation des portefeuilles, détection des faux rendements et gestion des clés.",
     objective: "Construire un bouclier impénétrable avant toute opération.",
@@ -1736,6 +1748,10 @@ const routeMapSteps: RouteStep[] = [
     nodeY: 60.5,
     badgeX: 59.0,
     badgeY: 60.5,
+    mNodeX: 45.6,
+    mNodeY: 56.8,
+    mBadgeX: 74.5,
+    mBadgeY: 56.8,
     description: "Comprendre le fonctionnement des actifs, de la crypto et des marchés financiers.",
     learning: "Actifs réels vs volatils, fonctionnement de la blockchain, rôle des marchés.",
     objective: "Savoir ce que l'on achète et pourquoi on l'achète.",
@@ -1748,6 +1764,10 @@ const routeMapSteps: RouteStep[] = [
     nodeY: 51.5,
     badgeX: 38.5,
     badgeY: 51.5,
+    mNodeX: 54.6,
+    mNodeY: 51.2,
+    mBadgeX: 21.0,
+    mBadgeY: 51.2,
     description: "Analyser les tendances, lire les graphiques et interpréter les cycles économiques.",
     learning: "Supports, résistances, volumes, cycles haussiers et baissiers.",
     objective: "Développer une lecture objective sans se laisser submerger par le bruit.",
@@ -1760,6 +1780,10 @@ const routeMapSteps: RouteStep[] = [
     nodeY: 42.5,
     badgeX: 60.0,
     badgeY: 42.5,
+    mNodeX: 45.4,
+    mNodeY: 45.3,
+    mBadgeX: 74.5,
+    mBadgeY: 45.3,
     description: "Définir un plan clair, calculer ses ratios risque/rendement et exécuter sans hésitation.",
     learning: "Plan d'investissement, stop-loss, take-profit et dimensionnement des positions.",
     objective: "Prendre des décisions mesurées basées sur des règles strictes.",
@@ -1772,6 +1796,10 @@ const routeMapSteps: RouteStep[] = [
     nodeY: 35.8,
     badgeX: 37.0,
     badgeY: 35.8,
+    mNodeX: 52.9,
+    mNodeY: 40.4,
+    mBadgeX: 21.0,
+    mBadgeY: 40.4,
     description: "Structurer un portefeuille équilibré, diversifié et résilient face aux tempêtes.",
     learning: "Allocation d'actifs, corrélation des marchés et gestion du risque global.",
     objective: "Préserver et faire croître son capital sur la durée.",
@@ -1784,6 +1812,10 @@ const routeMapSteps: RouteStep[] = [
     nodeY: 29.5,
     badgeX: 65.5,
     badgeY: 29.5,
+    mNodeX: 48.1,
+    mNodeY: 36.6,
+    mBadgeX: 74.5,
+    mBadgeY: 36.6,
     description: "Affiner sa psychologie, maîtriser ses émotions et automatiser ses protocoles.",
     learning: "Gestion du stress, analyse avancée, routines des opérateurs professionnels.",
     objective: "Atteindre la constance et la discipline des investisseurs avertis.",
@@ -1796,6 +1828,10 @@ const routeMapSteps: RouteStep[] = [
     nodeY: 22.5,
     badgeX: 63.5,
     badgeY: 22.5,
+    mNodeX: 53.0,
+    mNodeY: 31.3,
+    mBadgeX: 21.0,
+    mBadgeY: 31.3,
     description: "Intégrer le cercle restreint des mentors, partager son expertise et impacter sa communauté.",
     learning: "Stratégies institutionnelles, mentorat, transmission du savoir économique.",
     objective: "Transmettre et élever son entourage grâce à l'autonomie financière acquise.",
@@ -1816,177 +1852,344 @@ function Route() {
 
   return (
     <section id="route" className="route-interactive-section">
-      <div className="route-interactive__stage">
-        {/* Background Illustrated Route Landscape — ROUTE OG with crystal-clear native text & icons */}
-        <img
-          src="/ROUTE OG.png"
-          alt="La Route WÔY — Carte panoramique des 8 niveaux"
-          className="route-interactive__bg-img"
-        />
+      {/* ========================================================
+          1. DESKTOP VIEW ONLY (>= 1024px)
+          Strictly identical to existing desktop code
+          ======================================================== */}
+      <div className="route-desktop-only">
+        <div className="route-interactive__stage">
+          {/* Background Illustrated Route Landscape — ROUTE OG with crystal-clear native text & icons */}
+          <img
+            src="/ROUTE OG.png"
+            alt="La Route WÔY — Carte panoramique des 8 niveaux"
+            className="route-interactive__bg-img"
+          />
 
-        {/* Ambient atmospheric vignetting */}
-        <div className="route-interactive__vignette" aria-hidden="true" />
+          {/* Ambient atmospheric vignetting */}
+          <div className="route-interactive__vignette" aria-hidden="true" />
 
-        {/* 2. LEFT EDITORIAL BLOCK — Simple, compact, and space-saving */}
-        <div className="route-interactive__editorial route-interactive__editorial--compact">
-          <span className="route-editorial__kicker">LA ROUTE WÔY</span>
+          {/* 2. LEFT EDITORIAL BLOCK — Simple, compact, and space-saving */}
+          <div className="route-interactive__editorial route-interactive__editorial--compact">
+            <span className="route-editorial__kicker">LA ROUTE WÔY</span>
 
-          <h2 className="route-editorial__title-compact">
-            UNE ROUTE. DES NIVEAUX.<br />
-            <em>UNE TRANSFORMATION.</em>
-          </h2>
+            <h2 className="route-editorial__title-compact">
+              UNE ROUTE. DES NIVEAUX.<br />
+              <em>UNE TRANSFORMATION.</em>
+            </h2>
 
-          <p className="route-editorial__lead-compact">
-            De N0 à Cercle Élite, franchis chaque étape à ton rythme.
-          </p>
+            <p className="route-editorial__lead-compact">
+              De N0 à Cercle Élite, franchis chaque étape à ton rythme.
+            </p>
 
-          <ul className="route-editorial__features">
-            <li>
-              <span className="route-editorial__feat-check">✓</span>
-              <span>Progression pas à pas</span>
-            </li>
-            <li>
-              <span className="route-editorial__feat-check">✓</span>
-              <span>Gestion du risque &amp; sécurité</span>
-            </li>
-            <li>
-              <span className="route-editorial__feat-check">✓</span>
-              <span>Maîtrise &amp; transmission</span>
-            </li>
-          </ul>
+            <ul className="route-editorial__features">
+              <li>
+                <span className="route-editorial__feat-check">✓</span>
+                <span>Progression pas à pas</span>
+              </li>
+              <li>
+                <span className="route-editorial__feat-check">✓</span>
+                <span>Gestion du risque &amp; sécurité</span>
+              </li>
+              <li>
+                <span className="route-editorial__feat-check">✓</span>
+                <span>Maîtrise &amp; transmission</span>
+              </li>
+            </ul>
 
-          <p className="route-editorial__quote-compact">
-            &ldquo;Le savoir est une arme, la méthode ton bouclier.&rdquo;
-            <small>— DJÉLI WÔY</small>
-          </p>
-        </div>
+            <p className="route-editorial__quote-compact">
+              &ldquo;Le savoir est une arme, la méthode ton bouclier.&rdquo;
+              <small>— DJÉLI WÔY</small>
+            </p>
+          </div>
 
-        {/* 1 & 2. INTERACTIVE STEPS LAYER — Pedestal hotspot with animation + permanent text pill badge */}
-        <div
-          className="route-interactive__hotspots"
-          role="tablist"
-          aria-label="Sélectionner une étape de la Route"
-        >
-          {routeMapSteps.map((lvl, i) => {
-            const isCurrent = i === displayIndex
-            const isSelected = i === activeLevel
-
-            return (
-              <div key={lvl.id} className="route-step-interactive-group">
-                {/* 1. Clickable hotspot directly on the pedestal/icon with animated tactile feedback */}
-                <button
-                  type="button"
-                  className={`route-pedestal-hotspot${isCurrent ? " is-hovered" : ""}${
-                    isSelected ? " is-selected" : ""
-                  }`}
-                  style={{
-                    left: `${lvl.nodeX}%`,
-                    top: `${lvl.nodeY}%`,
-                  }}
-                  onMouseEnter={() => setHoveredLevel(i)}
-                  onMouseLeave={() => setHoveredLevel(null)}
-                  onClick={() => handleSelectLevel(i)}
-                  aria-label={`Icône ${lvl.level} : ${lvl.subtitle}`}
-                >
-                  <span className="route-pedestal-hotspot__aura" />
-                </button>
-
-                {/* 2. Permanent clean text pill badge beside the icon, identical to the ÉLITE reference */}
-                <button
-                  type="button"
-                  className={`route-level-pill${isCurrent ? " is-hovered" : ""}${
-                    isSelected ? " is-selected" : ""
-                  }${lvl.isElite ? " is-elite" : ""}`}
-                  style={{
-                    left: `${lvl.badgeX}%`,
-                    top: `${lvl.badgeY}%`,
-                  }}
-                  onMouseEnter={() => setHoveredLevel(i)}
-                  onMouseLeave={() => setHoveredLevel(null)}
-                  onClick={() => handleSelectLevel(i)}
-                  aria-label={`Niveau ${lvl.level} : ${lvl.subtitle}`}
-                >
-                  <span className="route-level-pill__num">{lvl.level}</span>
-                  <span className="route-level-pill__dot">•</span>
-                  <span className="route-level-pill__name">{lvl.subtitle}</span>
-                </button>
-              </div>
-            )
-          })}
-        </div>
-
-        {/* RIGHT LEVEL INFO PANEL */}
-        <div
-          id={`route-panel-${step.id}`}
-          role="tabpanel"
-          className="route-interactive__panel"
-        >
-          {/* Quick Level Stepper */}
-          <div className="route-panel__stepper" aria-label="Niveaux">
+          {/* 1 & 2. INTERACTIVE STEPS LAYER — Pedestal hotspot with animation + permanent text pill badge */}
+          <div
+            className="route-interactive__hotspots"
+            role="tablist"
+            aria-label="Sélectionner une étape de la Route"
+          >
             {routeMapSteps.map((lvl, i) => {
               const isCurrent = i === displayIndex
+              const isSelected = i === activeLevel
+
               return (
-                <button
-                  key={lvl.id}
-                  type="button"
-                  onClick={() => handleSelectLevel(i)}
-                  onMouseEnter={() => setHoveredLevel(i)}
-                  onMouseLeave={() => setHoveredLevel(null)}
-                  className={`route-panel__step-btn${isCurrent ? " is-active" : ""}${
-                    lvl.isElite ? " is-elite" : ""
-                  }`}
-                  aria-label={`Niveau ${lvl.level} : ${lvl.subtitle}`}
-                >
-                  {lvl.isElite ? "★" : lvl.level}
-                </button>
+                <div key={lvl.id} className="route-step-interactive-group">
+                  {/* 1. Clickable hotspot directly on the pedestal/icon with animated tactile feedback */}
+                  <button
+                    type="button"
+                    className={`route-pedestal-hotspot${isCurrent ? " is-hovered" : ""}${
+                      isSelected ? " is-selected" : ""
+                    }`}
+                    style={{
+                      left: `${lvl.nodeX}%`,
+                      top: `${lvl.nodeY}%`,
+                    }}
+                    onMouseEnter={() => setHoveredLevel(i)}
+                    onMouseLeave={() => setHoveredLevel(null)}
+                    onClick={() => handleSelectLevel(i)}
+                    aria-label={`Icône ${lvl.level} : ${lvl.subtitle}`}
+                  >
+                    <span className="route-pedestal-hotspot__aura" />
+                  </button>
+
+                  {/* 2. Permanent clean text pill badge beside the icon, identical to the ÉLITE reference */}
+                  <button
+                    type="button"
+                    className={`route-level-pill${isCurrent ? " is-hovered" : ""}${
+                      isSelected ? " is-selected" : ""
+                    }${lvl.isElite ? " is-elite" : ""}`}
+                    style={{
+                      left: `${lvl.badgeX}%`,
+                      top: `${lvl.badgeY}%`,
+                    }}
+                    onMouseEnter={() => setHoveredLevel(i)}
+                    onMouseLeave={() => setHoveredLevel(null)}
+                    onClick={() => handleSelectLevel(i)}
+                    aria-label={`Niveau ${lvl.level} : ${lvl.subtitle}`}
+                  >
+                    <span className="route-level-pill__num">{lvl.level}</span>
+                    <span className="route-level-pill__dot">•</span>
+                    <span className="route-level-pill__name">{lvl.subtitle}</span>
+                  </button>
+                </div>
               )
             })}
           </div>
 
-          <div className="route-panel__head">
-            <span className="route-panel__kicker">
-              NIVEAU {displayIndex + 1} / {routeMapSteps.length}
-            </span>
-            <h3 className="route-panel__title">
-              {step.isElite ? "Cercle Élite — Destination" : `${step.level} — ${step.subtitle}`}
-            </h3>
-            <p className="route-panel__desc">{step.description}</p>
+          {/* RIGHT LEVEL INFO PANEL */}
+          <div
+            id={`route-panel-${step.id}`}
+            role="tabpanel"
+            className="route-interactive__panel"
+          >
+            {/* Quick Level Stepper */}
+            <div className="route-panel__stepper" aria-label="Niveaux">
+              {routeMapSteps.map((lvl, i) => {
+                const isCurrent = i === displayIndex
+                return (
+                  <button
+                    key={lvl.id}
+                    type="button"
+                    onClick={() => handleSelectLevel(i)}
+                    onMouseEnter={() => setHoveredLevel(i)}
+                    onMouseLeave={() => setHoveredLevel(null)}
+                    className={`route-panel__step-btn${isCurrent ? " is-active" : ""}${
+                      lvl.isElite ? " is-elite" : ""
+                    }`}
+                    aria-label={`Niveau ${lvl.level} : ${lvl.subtitle}`}
+                  >
+                    {lvl.isElite ? "★" : lvl.level}
+                  </button>
+                )
+              })}
+            </div>
+
+            <div className="route-panel__head">
+              <span className="route-panel__kicker">
+                NIVEAU {displayIndex + 1} / {routeMapSteps.length}
+              </span>
+              <h3 className="route-panel__title">
+                {step.isElite ? "Cercle Élite — Destination" : `${step.level} — ${step.subtitle}`}
+              </h3>
+              <p className="route-panel__desc">{step.description}</p>
+            </div>
+
+            <div className="route-panel__blocks">
+              <div className="route-panel__block">
+                <small>CE QUE TU VAS APPRENDRE</small>
+                <p>{step.learning}</p>
+              </div>
+              <div className="route-panel__block">
+                <small>OBJECTIF PÉDAGOGIQUE</small>
+                <p>{step.objective}</p>
+              </div>
+            </div>
+
+            <div className="route-panel__actions">
+              <button
+                type="button"
+                className="route-panel__arrow-btn"
+                disabled={displayIndex === 0}
+                onClick={() => handleSelectLevel(displayIndex - 1)}
+                aria-label="Niveau précédent"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="m15 18-6-6 6-6" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                className="route-panel__arrow-btn"
+                disabled={displayIndex === routeMapSteps.length - 1}
+                onClick={() => handleSelectLevel(displayIndex + 1)}
+                aria-label="Niveau suivant"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="m9 18 6-6-6-6" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ========================================================
+          2. MOBILE VIEW ONLY (< 1024px)
+          Breathtaking 9:16 Vertical Interactive Experience
+          ======================================================== */}
+      <div className="route-mobile-only">
+        <div className="route-mobile__stage">
+          {/* Vertical 9:16 Background Map */}
+          <img
+            src="/route-mobile.png"
+            alt="La Route WÔY — Carte verticale des 8 niveaux"
+            className="route-mobile__bg-img"
+          />
+
+          {/* Vignette lighting overlay */}
+          <div className="route-mobile__vignette" aria-hidden="true" />
+
+          {/* TOP EDITORIAL BLOCK (in sky space) */}
+          <div className="route-mobile__editorial">
+            <span className="route-mobile__kicker">LA ROUTE WÔY</span>
+            <h2 className="route-mobile__title">
+              UNE ROUTE. DES NIVEAUX.<br />
+              <em>UNE TRANSFORMATION.</em>
+            </h2>
+            <p className="route-mobile__lead">
+              De N0 à Cercle Élite, franchis chaque étape à ton rythme.
+            </p>
+            <div className="route-mobile__chips">
+              <span className="route-mobile__chip">✓ Progression pas à pas</span>
+              <span className="route-mobile__chip">✓ Risque &amp; Sécurité</span>
+              <span className="route-mobile__chip">✓ Maîtrise</span>
+            </div>
           </div>
 
-          <div className="route-panel__blocks">
-            <div className="route-panel__block">
-              <small>CE QUE TU VAS APPRENDRE</small>
-              <p>{step.learning}</p>
-            </div>
-            <div className="route-panel__block">
-              <small>OBJECTIF PÉDAGOGIQUE</small>
-              <p>{step.objective}</p>
-            </div>
+          {/* INTERACTIVE HOTSPOTS & BADGES LAYER */}
+          <div
+            className="route-mobile__hotspots"
+            role="tablist"
+            aria-label="Sélectionner une étape de la Route sur mobile"
+          >
+            {routeMapSteps.map((lvl, i) => {
+              const isSelected = i === activeLevel
+
+              return (
+                <div key={`m-${lvl.id}`} className="route-mobile-step-group">
+                  {/* Hotspot right on the pedestal */}
+                  <button
+                    type="button"
+                    className={`route-mobile-hotspot${isSelected ? " is-selected" : ""}`}
+                    style={{
+                      left: `${lvl.mNodeX}%`,
+                      top: `${lvl.mNodeY}%`,
+                    }}
+                    onClick={() => handleSelectLevel(i)}
+                    aria-label={`Icône ${lvl.level} : ${lvl.subtitle}`}
+                  >
+                    <span className="route-mobile-hotspot__pulse" />
+                  </button>
+
+                  {/* Level Pill Badge */}
+                  <button
+                    type="button"
+                    className={`route-mobile-pill${isSelected ? " is-selected" : ""}${
+                      lvl.isElite ? " is-elite" : ""
+                    }`}
+                    style={{
+                      left: `${lvl.mBadgeX}%`,
+                      top: `${lvl.mBadgeY}%`,
+                    }}
+                    onClick={() => handleSelectLevel(i)}
+                    aria-label={`Niveau ${lvl.level} : ${lvl.subtitle}`}
+                  >
+                    <span className="route-mobile-pill__num">{lvl.level}</span>
+                    <span className="route-mobile-pill__dot">•</span>
+                    <span className="route-mobile-pill__name">{lvl.subtitle}</span>
+                  </button>
+                </div>
+              )
+            })}
           </div>
 
-          <div className="route-panel__actions">
-            <button
-              type="button"
-              className="route-panel__arrow-btn"
-              disabled={displayIndex === 0}
-              onClick={() => handleSelectLevel(displayIndex - 1)}
-              aria-label="Niveau précédent"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="m15 18-6-6 6-6" />
-              </svg>
-            </button>
-            <button
-              type="button"
-              className="route-panel__arrow-btn"
-              disabled={displayIndex === routeMapSteps.length - 1}
-              onClick={() => handleSelectLevel(displayIndex + 1)}
-              aria-label="Niveau suivant"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="m9 18 6-6-6-6" />
-              </svg>
-            </button>
+          {/* BOTTOM LEVEL INFO PANEL (in village space below compass) */}
+          <div
+            id={`route-mobile-panel-${step.id}`}
+            role="tabpanel"
+            className="route-mobile__panel"
+          >
+            {/* Stepper horizontal */}
+            <div className="route-mobile__stepper" aria-label="Niveaux">
+              {routeMapSteps.map((lvl, i) => {
+                const isSelected = i === activeLevel
+                return (
+                  <button
+                    key={`m-btn-${lvl.id}`}
+                    type="button"
+                    onClick={() => handleSelectLevel(i)}
+                    className={`route-mobile__step-btn${isSelected ? " is-active" : ""}${
+                      lvl.isElite ? " is-elite" : ""
+                    }`}
+                    aria-label={`Niveau ${lvl.level} : ${lvl.subtitle}`}
+                  >
+                    {lvl.isElite ? "★" : lvl.level}
+                  </button>
+                )
+              })}
+            </div>
+
+            {/* Header with Title and Nav arrows */}
+            <div className="route-mobile__panel-head">
+              <div className="route-mobile__panel-title-wrap">
+                <span className="route-mobile__panel-kicker">
+                  NIVEAU {displayIndex + 1} / {routeMapSteps.length}
+                </span>
+                <h3 className="route-mobile__panel-title">
+                  {step.isElite ? "Cercle Élite — Destination" : `${step.level} — ${step.subtitle}`}
+                </h3>
+              </div>
+
+              <div className="route-mobile__panel-arrows">
+                <button
+                  type="button"
+                  className="route-mobile__arrow-btn"
+                  disabled={displayIndex === 0}
+                  onClick={() => handleSelectLevel(displayIndex - 1)}
+                  aria-label="Niveau précédent"
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="m15 18-6-6 6-6" />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  className="route-mobile__arrow-btn"
+                  disabled={displayIndex === routeMapSteps.length - 1}
+                  onClick={() => handleSelectLevel(displayIndex + 1)}
+                  aria-label="Niveau suivant"
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="m9 18 6-6-6-6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            {/* Description */}
+            <p className="route-mobile__panel-desc">{step.description}</p>
+
+            {/* Two Information Blocks */}
+            <div className="route-mobile__panel-blocks">
+              <div className="route-mobile__panel-block">
+                <span className="route-mobile__block-tag">CE QUE TU VAS APPRENDRE</span>
+                <p>{step.learning}</p>
+              </div>
+              <div className="route-mobile__panel-block">
+                <span className="route-mobile__block-tag">OBJECTIF PÉDAGOGIQUE</span>
+                <p>{step.objective}</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
